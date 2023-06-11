@@ -1,19 +1,26 @@
 import React from 'react';
+import { Transition } from '@headlessui/react';
 
 import { IoBagCheckOutline, IoPersonOutline } from 'react-icons/io5';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { GiConverseShoe } from 'react-icons/gi';
 
-const NavBar = () => {
+const NavBar = ({ showNav, setShowNav }) => {
+  const handleShowNav = () => {
+    setShowNav(!showNav);
+    document.documentElement.classList.toggle('overflow-clip');
+    document.body.classList.toggle('overflow-clip');
+  };
+
   return (
-    <div className='h-screen md:h-fit'>
-      <div className='flex justify-between px-10 md:px-24 py-4'>
+    <div className='sticky top-0 z-10 bg-white'>
+      <div className='flex justify-between px-10 py-4 lg:px-24'>
         <div className='flex gap-16'>
-          <div className='text-3xl font-extrabold flex items-center gap-2'>
+          <div className='flex items-center gap-2 text-3xl font-extrabold'>
             <GiConverseShoe className='text-5xl' />
             shoestore
           </div>
-          <ul className='hidden md:flex items-center gap-8 mt-1'>
+          <ul className='mt-1 hidden items-center gap-8 text-lg lg:flex'>
             <li>Men</li>
             <li>Women</li>
             <li>Kids</li>
@@ -28,18 +35,28 @@ const NavBar = () => {
           <button>
             <IoPersonOutline className='text-xl' />
           </button>
-          <button className='md:hidden'>
+          <button onClick={handleShowNav} className='lg:hidden'>
             <RxHamburgerMenu className='text-xl' />
           </button>
         </div>
       </div>
 
-      <ul className='md:hidden text-center'>
+      <Transition
+        show={showNav}
+        as='ul'
+        enter='transition-opacity duration-500'
+        enterFrom='opacity-0'
+        enterTo='opacity-100'
+        leave='transition-opacity duration-500'
+        leaveFrom='opacity-100'
+        leaveTo='opacity-0'
+        className='absolute flex h-screen w-full flex-col gap-4 bg-white p-32 text-center text-xl lg:hidden'
+      >
         <li>Men</li>
         <li>Women</li>
         <li>Kids</li>
         <li>Unisex</li>
-      </ul>
+      </Transition>
     </div>
   );
 };
