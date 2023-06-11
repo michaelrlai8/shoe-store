@@ -1,6 +1,8 @@
 import React from 'react';
 import { Transition } from '@headlessui/react';
 
+import { Link } from 'react-router-dom';
+
 import { IoBagCheckOutline, IoPersonOutline } from 'react-icons/io5';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { GiConverseShoe } from 'react-icons/gi';
@@ -15,16 +17,18 @@ const NavBar = ({ showNav, setShowNav }) => {
   return (
     <div className='sticky top-0 z-10 bg-white'>
       <div className='flex justify-between px-10 py-4 lg:px-24'>
-        <div className='flex gap-16'>
+        <div className='flex gap-10'>
           <div className='flex items-center gap-2 text-3xl font-extrabold'>
-            <GiConverseShoe className='text-5xl' />
-            shoestore
+            <Link to='/'>
+              <GiConverseShoe className='text-5xl' />
+            </Link>
+            <Link to='/'>shoestore</Link>
           </div>
-          <ul className='mt-1 hidden items-center gap-8 text-lg lg:flex'>
-            <li>Men</li>
-            <li>Women</li>
-            <li>Kids</li>
-            <li>Unisex</li>
+          <ul className='mt-1 hidden items-center gap-6 text-sm lg:flex'>
+            <li>MEN</li>
+            <li>WOMEN</li>
+            <li>KIDS</li>
+            <li>UNISEX</li>
           </ul>
         </div>
 
@@ -50,12 +54,12 @@ const NavBar = ({ showNav, setShowNav }) => {
         leave='transition-opacity duration-500'
         leaveFrom='opacity-100'
         leaveTo='opacity-0'
-        className='absolute flex h-screen w-full flex-col gap-4 bg-white p-32 text-center text-xl lg:hidden'
+        className='absolute flex h-screen w-full flex-col gap-8 bg-white p-32 text-center text-lg lg:hidden'
       >
-        <li>Men</li>
-        <li>Women</li>
-        <li>Kids</li>
-        <li>Unisex</li>
+        <li>MEN</li>
+        <li>WOMEN</li>
+        <li>KIDS</li>
+        <li>UNISEX</li>
       </Transition>
     </div>
   );
