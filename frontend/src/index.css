@@ -14,7 +14,3 @@
 html {
   @apply bg-white;
 }
-
-a {
-  @apply hover:font-bold;
-}

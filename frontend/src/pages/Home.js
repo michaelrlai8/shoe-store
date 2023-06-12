@@ -28,16 +28,14 @@ const Home = () => {
         Now with free shipping on all orders!
       </div>
 
-      <div className='mt-12 flex flex-col px-6 lg:gap-12 lg:px-24'>
-        <div className='text-3xl font-bold'>Collections</div>
-
-        <div className='lg:flex lg:gap-8'>
+      <div className='mt-12 flex h-screen flex-col'>
+        <div className='px-6 lg:flex lg:gap-8 lg:px-24'>
           <div className='w-full flex-grow'>
             <img src={men} alt='' className='aspect-square object-cover' />
             <div>
               <div className='text-2xl font-bold'>Men</div>
               <div className='mb-2'>See our mens collection</div>
-              <button className='mb-12 bg-black px-8 py-2 font-semibold text-white lg:mb-0'>
+              <button className='mb-12 w-48 bg-black py-3 font-semibold text-white'>
                 SHOP MEN
               </button>
             </div>
@@ -47,22 +45,22 @@ const Home = () => {
             <div>
               <div className='text-2xl font-bold'>Women</div>
               <div className='mb-2'>See our womens collection</div>
-              <button className='mb-12 bg-black px-8 py-2 font-semibold text-white lg:mb-0'>
+              <button className='mb-12 w-48 bg-black py-3 font-semibold text-white'>
                 SHOP WOMEN
               </button>
             </div>
           </div>
         </div>
 
-        <img src={mid} alt='' className='aspect-square object-cover' />
+        <img src={mid} alt='' className='mb-12 h-2/3 object-cover' />
 
-        <div className='lg:flex lg:gap-8'>
+        <div className='mb-12 px-6 lg:flex lg:gap-8 lg:px-24'>
           <div className='w-full flex-grow'>
             <img src={kids} alt='' className='aspect-square object-cover ' />
             <div>
               <div className='text-2xl font-bold'>Kids</div>
               <div className='mb-2'>See our kids collection</div>
-              <button className='mb-12 bg-black px-8 py-2 font-semibold text-white lg:mb-0'>
+              <button className='mb-12 w-48 bg-black py-3 font-semibold text-white'>
                 SHOP KIDS
               </button>
             </div>
@@ -72,10 +70,17 @@ const Home = () => {
             <div>
               <div className='text-2xl font-bold'>Unisex</div>
               <div className='mb-2'>See our unisex collection</div>
-              <button className='mb-12 bg-black px-8 py-2 font-semibold text-white lg:mb-0'>
+              <button className='w-48 bg-black py-3 font-semibold text-white'>
                 SHOP UNISEX
               </button>
             </div>
+          </div>
+        </div>
+
+        <div className='flex flex-col gap-4 px-6 py-8 lg:px-24'>
+          <div>Created by </div>
+          <div className='text-xs'>
+            Product images from adidas.com unless otherwise indicated
           </div>
         </div>
       </div>
