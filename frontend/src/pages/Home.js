@@ -15,7 +15,7 @@ const Home = () => {
         alt='grey pair of shoes'
         className='h-screen w-screen object-cover brightness-75'
       />
-      <div className='right- absolute bottom-0 flex w-full flex-col gap-4 px-6 py-20 text-white lg:items-end lg:px-20 lg:py-48'>
+      <div className='absolute bottom-0 flex w-full flex-col gap-4 px-6 py-36 text-white lg:items-end lg:px-20'>
         <div className='text-4xl font-semibold'>This is a shoe store</div>
         <div>You can find shoes for every activity here</div>
         <div>
