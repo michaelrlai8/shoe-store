@@ -78,15 +78,23 @@ const NavBar = ({ showNav, setShowNav }) => {
         enter='transition-opacity duration-500'
         enterFrom='opacity-0'
         enterTo='opacity-100'
-        leave='transition-opacity duration-500'
+        leave='transition-opacity duration-0'
         leaveFrom='opacity-100'
         leaveTo='opacity-0'
         className='absolute flex h-screen w-full flex-col gap-8 bg-white p-32 text-center text-lg lg:hidden'
       >
-        <NavLink to='/products'>MEN</NavLink>
-        <NavLink to='/products'>WOMEN</NavLink>
-        <NavLink to='/products'>KIDS</NavLink>
-        <NavLink to='/products'>UNISEX</NavLink>
+        <NavLink to='/' onClick={handleShowNav}>
+          MEN
+        </NavLink>
+        <NavLink to='/' onClick={handleShowNav}>
+          WOMEN
+        </NavLink>
+        <NavLink to='/' onClick={handleShowNav}>
+          KIDS
+        </NavLink>
+        <NavLink to='/' onClick={handleShowNav}>
+          UNISEX
+        </NavLink>
       </Transition>
     </div>
   );
