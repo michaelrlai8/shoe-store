@@ -24,9 +24,6 @@ const Home = () => {
           </button>
         </div>
       </div>
-      <div className='absolute bottom-0 w-screen bg-orange-600 py-1 text-center text-lg text-white'>
-        Now with free shipping on all orders!
-      </div>
 
       <div className='mt-12 flex h-screen flex-col'>
         <div className='px-6 lg:flex lg:gap-8 lg:px-24'>

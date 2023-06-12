@@ -1,13 +1,20 @@
-import React from 'react';
-import { Transition } from '@headlessui/react';
+import React, { useState } from 'react';
 
 import { Link, NavLink } from 'react-router-dom';
 
-import { IoBagCheckOutline, IoPersonOutline } from 'react-icons/io5';
+import { Transition } from '@headlessui/react';
+
+import {
+  IoBagCheckOutline,
+  IoCloseOutline,
+  IoPersonOutline,
+} from 'react-icons/io5';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { GiConverseShoe } from 'react-icons/gi';
 
 const NavBar = ({ showNav, setShowNav }) => {
+  const [showShipping, setShowShipping] = useState(true);
+
   const handleShowNav = () => {
     setShowNav(!showNav);
     document.documentElement.classList.toggle('overflow-hidden');
@@ -44,6 +51,21 @@ const NavBar = ({ showNav, setShowNav }) => {
           </button>
         </div>
       </div>
+
+      {showShipping && (
+        <div className='absolute flex w-screen justify-center bg-red-500 text-white'>
+          <div className='mr-auto'>
+            <IoCloseOutline className='text-red-500' />
+          </div>
+          <div className=''>Now with free shipping on all orders!</div>
+          <button
+            onClick={() => setShowShipping(false)}
+            className='ml-auto pr-1'
+          >
+            <IoCloseOutline className='text-white' />
+          </button>
+        </div>
+      )}
 
       <Transition
         show={showNav}
