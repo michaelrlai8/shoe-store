@@ -17,7 +17,6 @@ const NavBar = ({ showNav, setShowNav }) => {
 
   const handleShowNav = () => {
     setShowNav(!showNav);
-    document.documentElement.classList.toggle('overflow-hidden');
     document.body.classList.toggle('overflow-hidden');
   };
 
