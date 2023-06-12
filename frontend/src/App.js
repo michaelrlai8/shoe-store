@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import { Route, Routes } from 'react-router-dom';
-import { Transition } from '@headlessui/react';
 
 import NavBar from './components/NavBar';
 
