@@ -17,19 +17,20 @@ const NavBar = ({ showNav, setShowNav }) => {
 
   const handleShowNav = () => {
     setShowNav(!showNav);
-    document.documentElement.classList.toggle('overflow-hidden');
     document.body.classList.toggle('overflow-hidden');
   };
 
   return (
-    <div className='sticky top-0 z-10 bg-white'>
+    <div className='fixed top-0 z-10 w-full bg-white'>
       <div className='flex justify-between px-5 py-4 lg:px-24'>
         <div className='flex gap-10'>
           <div className='flex items-center gap-2 text-xl font-extrabold'>
-            <Link to='/'>
+            <Link to='/' onClick={handleShowNav}>
               <GiConverseShoe className='text-2xl' />
             </Link>
-            <Link to='/'>shoestore</Link>
+            <Link to='/' onClick={handleShowNav}>
+              shoestore
+            </Link>
           </div>
           <ul className='mt-1 hidden items-center gap-6 text-sm lg:flex'>
             <NavLink to='/products'>MEN</NavLink>
