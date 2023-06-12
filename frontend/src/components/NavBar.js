@@ -1,7 +1,7 @@
 import React from 'react';
 import { Transition } from '@headlessui/react';
 
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import { IoBagCheckOutline, IoPersonOutline } from 'react-icons/io5';
 import { RxHamburgerMenu } from 'react-icons/rx';
@@ -25,10 +25,10 @@ const NavBar = ({ showNav, setShowNav }) => {
             <Link to='/'>shoestore</Link>
           </div>
           <ul className='mt-1 hidden items-center gap-6 text-sm lg:flex'>
-            <li>MEN</li>
-            <li>WOMEN</li>
-            <li>KIDS</li>
-            <li>UNISEX</li>
+            <NavLink to='/products'>MEN</NavLink>
+            <NavLink to='/products'>WOMEN</NavLink>
+            <NavLink to='/products'>KIDS</NavLink>
+            <NavLink to='/products'>UNISEX</NavLink>
           </ul>
         </div>
 
@@ -56,10 +56,10 @@ const NavBar = ({ showNav, setShowNav }) => {
         leaveTo='opacity-0'
         className='absolute flex h-screen w-full flex-col gap-8 bg-white p-32 text-center text-lg lg:hidden'
       >
-        <li>MEN</li>
-        <li>WOMEN</li>
-        <li>KIDS</li>
-        <li>UNISEX</li>
+        <NavLink to='/products'>MEN</NavLink>
+        <NavLink to='/products'>WOMEN</NavLink>
+        <NavLink to='/products'>KIDS</NavLink>
+        <NavLink to='/products'>UNISEX</NavLink>
       </Transition>
     </div>
   );
