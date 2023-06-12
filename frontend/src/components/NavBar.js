@@ -52,20 +52,25 @@ const NavBar = ({ showNav, setShowNav }) => {
         </div>
       </div>
 
-      {showShipping && (
-        <div className='absolute flex w-screen justify-center bg-red-500 text-white'>
-          <div className='mr-auto'>
-            <IoCloseOutline className='text-red-500' />
-          </div>
-          <div className=''>Now with free shipping on all orders!</div>
-          <button
-            onClick={() => setShowShipping(false)}
-            className='ml-auto pr-1'
-          >
-            <IoCloseOutline className='text-white' />
-          </button>
+      <Transition
+        show={showShipping}
+        as='div'
+        enter='transition-opacity duration-500'
+        enterFrom='opacity-0'
+        enterTo='opacity-100'
+        leave='transition-opacity duration-500'
+        leaveFrom='opacity-100'
+        leaveTo='opacity-0'
+        className='absolute flex w-screen justify-center bg-red-500 text-white'
+      >
+        <div className='mr-auto'>
+          <IoCloseOutline className='text-red-500' />
         </div>
-      )}
+        <div className=''>Now with free shipping on all orders!</div>
+        <button onClick={() => setShowShipping(false)} className='ml-auto pr-1'>
+          <IoCloseOutline className='text-white' />
+        </button>
+      </Transition>
 
       <Transition
         show={showNav}
