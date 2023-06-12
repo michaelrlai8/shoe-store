@@ -10,17 +10,17 @@ import { GiConverseShoe } from 'react-icons/gi';
 const NavBar = ({ showNav, setShowNav }) => {
   const handleShowNav = () => {
     setShowNav(!showNav);
-    document.documentElement.classList.toggle('overflow-clip');
-    document.body.classList.toggle('overflow-clip');
+    document.documentElement.classList.toggle('overflow-hidden');
+    document.body.classList.toggle('overflow-hidden');
   };
 
   return (
     <div className='sticky top-0 z-10 bg-white'>
-      <div className='flex justify-between px-10 py-4 lg:px-24'>
+      <div className='flex justify-between px-5 py-4 lg:px-24'>
         <div className='flex gap-10'>
-          <div className='flex items-center gap-2 text-3xl font-extrabold'>
+          <div className='flex items-center gap-2 text-xl font-extrabold'>
             <Link to='/'>
-              <GiConverseShoe className='text-5xl' />
+              <GiConverseShoe className='text-2xl' />
             </Link>
             <Link to='/'>shoestore</Link>
           </div>

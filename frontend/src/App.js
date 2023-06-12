@@ -12,7 +12,7 @@ function App() {
   const [showNav, setShowNav] = useState(false);
 
   return (
-    <div className='App font-light'>
+    <div className='App relative flex h-screen flex-col'>
       <NavBar showNav={showNav} setShowNav={setShowNav} />
 
       <Routes>
