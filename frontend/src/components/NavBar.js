@@ -25,26 +25,34 @@ const NavBar = ({ showNav, setShowNav }) => {
       <div className='flex justify-between px-5 py-4 lg:px-24'>
         <div className='flex gap-10'>
           <div className='flex items-center gap-2 text-xl font-extrabold'>
-            <Link to='/' onClick={handleShowNav}>
+            <Link to='/' onClick={showNav ? handleShowNav : null}>
               <GiConverseShoe className='text-2xl' />
             </Link>
-            <Link to='/' onClick={handleShowNav}>
+            <Link to='/' onClick={showNav ? handleShowNav : null}>
               shoestore
             </Link>
           </div>
           <ul className='mt-1 hidden items-center gap-6 text-sm lg:flex'>
-            <NavLink to='/products'>MEN</NavLink>
-            <NavLink to='/products'>WOMEN</NavLink>
-            <NavLink to='/products'>KIDS</NavLink>
-            <NavLink to='/products'>UNISEX</NavLink>
+            <NavLink to='/products' onClick={handleShowNav}>
+              MEN
+            </NavLink>
+            <NavLink to='/products' onClick={handleShowNav}>
+              WOMEN
+            </NavLink>
+            <NavLink to='/products' onClick={handleShowNav}>
+              KIDS
+            </NavLink>
+            <NavLink to='/products' onClick={handleShowNav}>
+              UNISEX
+            </NavLink>
           </ul>
         </div>
 
         <div className='flex items-center gap-4'>
-          <button>
+          <button onClick={showNav ? handleShowNav : null}>
             <IoBagCheckOutline className='text-xl' />
           </button>
-          <button>
+          <button onClick={showNav ? handleShowNav : null}>
             <IoPersonOutline className='text-xl' />
           </button>
           <button onClick={handleShowNav} className='lg:hidden'>
