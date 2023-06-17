@@ -20,6 +20,14 @@ const ProductDetails = () => {
             color
             sizes
             slug
+            category {
+              data {
+                id
+                attributes {
+                  name
+                }
+              }
+            }
             images {
               data {
                 id
@@ -42,16 +50,34 @@ const ProductDetails = () => {
   });
 
   useEffect(() => {
-    console.log('hi');
     if (data && name !== data.product.data.attributes.slug) {
       navigate(`/products/${id}/${data.product.data.attributes.slug}`);
+      console.log(data);
     }
-  }, [data]);
+  });
 
   return (
-    <div className='mt-36'>
-      <div>ProductDetails</div>
-      <div>{name}</div>
+    <div className='mt-24'>
+      {data && (
+        <div className='w-screen lg:flex'>
+          <div className='w-full'>
+            <img
+              src={`${process.env.REACT_APP_API_URL}${data.product.data.attributes.images.data[0].attributes.url}`}
+              alt=''
+              className='w-full'
+            />
+          </div>
+          <div className='w-full'>
+            <div className='px-6'>
+              <div>{data.product.data.attributes.name}</div>
+              <div>
+                {data.product.data.attributes.category.data.attributes.name}
+              </div>
+              <div>{`$${data.product.data.attributes.price}`}</div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
