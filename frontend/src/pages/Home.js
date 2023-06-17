@@ -1,17 +1,19 @@
 import React from 'react';
 
-import main from '../assets/main.jpg';
+import hero from '../assets/hero.jpg';
 import men from '../assets/men.jpg';
 import women from '../assets/women.jpg';
 import kids from '../assets/kids.jpg';
 import unisex from '../assets/unisex.jpg';
 import mid from '../assets/mid.jpg';
 
+import Footer from '../components/Footer';
+
 const Home = () => {
   return (
     <div className='absolute top-0  h-screen w-screen'>
       <img
-        src={main}
+        src={hero}
         alt='grey pair of shoes'
         className='h-screen w-screen object-cover brightness-75'
       />
@@ -74,12 +76,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className='flex flex-col gap-4 px-6 py-8 lg:px-24'>
-          <div>Created by </div>
-          <div className='text-xs'>
-            Product images from adidas.com unless otherwise indicated
-          </div>
-        </div>
+        <Footer />
       </div>
     </div>
   );

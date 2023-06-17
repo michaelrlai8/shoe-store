@@ -33,16 +33,16 @@ const NavBar = ({ showNav, setShowNav }) => {
             </Link>
           </div>
           <ul className='mt-1 hidden items-center gap-6 text-sm lg:flex'>
-            <NavLink to='/products' onClick={handleShowNav}>
+            <NavLink to='/products' onClick={showNav ? handleShowNav : null}>
               MEN
             </NavLink>
-            <NavLink to='/products' onClick={handleShowNav}>
+            <NavLink to='/products' onClick={showNav ? handleShowNav : null}>
               WOMEN
             </NavLink>
-            <NavLink to='/products' onClick={handleShowNav}>
+            <NavLink to='/products' onClick={showNav ? handleShowNav : null}>
               KIDS
             </NavLink>
-            <NavLink to='/products' onClick={handleShowNav}>
+            <NavLink to='/products' onClick={showNav ? handleShowNav : null}>
               UNISEX
             </NavLink>
           </ul>
