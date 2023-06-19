@@ -25,6 +25,24 @@ function App() {
             color
             sizes
             slug
+            colorway
+            variants {
+              data {
+                id
+                attributes {
+                  name
+                  images {
+                    data {
+                      id
+                      attributes {
+                        url
+                      }
+                    }
+                  }
+                  colorway
+                }
+              }
+            }
             images {
               data {
                 id

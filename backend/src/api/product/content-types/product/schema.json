@@ -54,6 +54,11 @@
     },
     "slug": {
       "type": "string"
+    },
+    "colorway": {
+      "type": "string",
+      "required": true,
+      "unique": false
     }
   }
 }

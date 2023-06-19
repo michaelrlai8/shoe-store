@@ -4,11 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 import { Transition } from '@headlessui/react';
 
-import {
-  IoBagCheckOutline,
-  IoCloseOutline,
-  IoPersonOutline,
-} from 'react-icons/io5';
+import { IoBagCheckOutline, IoPersonOutline } from 'react-icons/io5';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { GiConverseShoe } from 'react-icons/gi';
 
@@ -61,7 +57,7 @@ const NavBar = ({ showNav, setShowNav }) => {
         </div>
       </div>
 
-      <Transition
+      {/*   <Transition
         show={showShipping}
         as='div'
         enter='transition-opacity duration-500'
@@ -79,7 +75,7 @@ const NavBar = ({ showNav, setShowNav }) => {
         <button onClick={() => setShowShipping(false)} className='ml-auto pr-1'>
           <IoCloseOutline className='text-white' />
         </button>
-      </Transition>
+      </Transition> */}
 
       <Transition
         show={showNav}
