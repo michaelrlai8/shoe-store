@@ -6,6 +6,8 @@ import { useQuery, gql } from '@apollo/client';
 
 import Footer from '../components/Footer';
 
+import { Link } from 'react-router-dom';
+
 import {
   IoChevronDown,
   IoChevronUp,
@@ -17,6 +19,7 @@ const ProductDetails = () => {
   const [showShippingPolicy, setShowShippingPolicy] = useState(false);
   const [showSizeGuide, setShowSizeGuide] = useState(false);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+  const [selectedSize, setSelectedSize] = useState();
 
   const { id, name } = useParams();
   const navigate = useNavigate();
@@ -141,13 +144,22 @@ const ProductDetails = () => {
               <div>{`$${data.product.data.attributes.price}`}</div>
               <div className='mt-6 grid grid-cols-5 gap-2'>
                 {data.product.data.attributes.variants.data.map((variant) => (
-                  <div key={variant.attributes.colorway} className='relative'>
+                  <Link
+                    onClick={() => setSelectedSize(0)}
+                    to={`/products/${variant.id}`}
+                    key={variant.attributes.colorway}
+                    className='relative'
+                  >
                     <img
                       src={`${process.env.REACT_APP_API_URL}${variant.attributes.images.data[0].attributes.url}`}
                       alt=''
                     />
-                    <div className='absolute left-0 top-0 h-full w-full border-solid border-black hover:border'></div>
-                  </div>
+                    <div
+                      className={`absolute left-0 top-0 h-full w-full border-solid border-black hover:border ${
+                        variant.id === data.product.data.id ? 'border' : ''
+                      }`}
+                    ></div>
+                  </Link>
                 ))}
               </div>
               <div className='mt-6'>
@@ -156,8 +168,11 @@ const ProductDetails = () => {
               <div className='mt-2 grid grid-cols-5 gap-2'>
                 {data.product.data.attributes.sizes.map((size) => (
                   <button
+                    onClick={() => setSelectedSize(size)}
                     key={size}
-                    className='border border-solid border-gray-200 py-2 text-center hover:border-black'
+                    className={`border border-solid border-gray-200 py-2 text-center hover:border-black ${
+                      selectedSize === size ? 'border-black' : ''
+                    }`}
                   >
                     {size}
                   </button>

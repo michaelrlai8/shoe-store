@@ -7,9 +7,32 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
+const cache = new InMemoryCache({
+  typePolicies: {
+    ProductEntity: {
+      fields: {
+        attributes: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+      },
+    },
+    UploadFileEntity: {
+      fields: {
+        attributes: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+      },
+    },
+  },
+});
+
 const client = new ApolloClient({
   uri: `${process.env.REACT_APP_API_URL}/graphql`,
-  cache: new InMemoryCache(),
+  cache: cache,
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
