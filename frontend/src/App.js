@@ -8,11 +8,12 @@ import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetails from './pages/ProductDetails';
 
-import { useQuery, gql } from '@apollo/client';
+// import { useQuery, gql } from '@apollo/client';
 
 function App() {
   const [showNav, setShowNav] = useState(false);
 
+  /*
   const GET_PRODUCTS = gql`
     query GetProducts {
       products {
@@ -60,7 +61,8 @@ function App() {
     }
   `;
 
-  const { loading, error, data } = useQuery(GET_PRODUCTS);
+   const { loading, error, data } = useQuery(GET_PRODUCTS);
+*/
 
   return (
     <div className='App relative flex h-full flex-col'>

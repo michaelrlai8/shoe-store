@@ -79,7 +79,7 @@ const ProductDetails = () => {
     }
   `;
 
-  const { loading, error, data } = useQuery(GET_PRODUCT, {
+  const { error, data } = useQuery(GET_PRODUCT, {
     variables: { id },
   });
 

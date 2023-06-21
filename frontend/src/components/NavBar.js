@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Link, NavLink } from 'react-router-dom';
 
@@ -9,8 +9,6 @@ import { RxHamburgerMenu } from 'react-icons/rx';
 import { GiConverseShoe } from 'react-icons/gi';
 
 const NavBar = ({ showNav, setShowNav }) => {
-  const [showShipping, setShowShipping] = useState(true);
-
   const handleShowNav = () => {
     setShowNav(!showNav);
     document.body.classList.toggle('overflow-hidden');
