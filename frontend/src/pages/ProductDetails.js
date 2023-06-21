@@ -170,8 +170,8 @@ const ProductDetails = () => {
                   <button
                     onClick={() => setSelectedSize(size)}
                     key={size}
-                    className={`border border-solid border-gray-200 py-2 text-center hover:border-black ${
-                      selectedSize === size ? 'border-black' : ''
+                    className={`border border-solid py-2 text-center hover:border-black ${
+                      selectedSize === size ? 'border-black' : 'border-gray-200'
                     }`}
                   >
                     {size}
