@@ -63,7 +63,7 @@ function App() {
   const { loading, error, data } = useQuery(GET_PRODUCTS);
 
   return (
-    <div className='App relative flex h-screen flex-col'>
+    <div className='App relative flex h-full flex-col'>
       <NavBar showNav={showNav} setShowNav={setShowNav} />
 
       <Routes>

@@ -8,6 +8,7 @@ import unisex from '../assets/unisex.jpg';
 import mid from '../assets/mid.jpg';
 
 import Footer from '../components/Footer';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
@@ -20,11 +21,11 @@ const Home = () => {
       <div className='absolute bottom-0 flex w-full flex-col gap-4 px-6 py-36 text-white lg:items-end lg:px-20'>
         <div className='text-4xl font-semibold'>This is a shoe store</div>
         <div>You can find shoes for every activity here</div>
-        <div>
+        <Link to='/products'>
           <button className='bg-white px-10 py-3 font-semibold text-black'>
             SHOP NOW
           </button>
-        </div>
+        </Link>
       </div>
 
       <div className='mt-12 flex h-screen flex-col'>
