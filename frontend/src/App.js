@@ -8,7 +8,7 @@ import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetails from './pages/ProductDetails';
 
-// import { useQuery, gql } from '@apollo/client';
+//import { useQuery, gql } from '@apollo/client';
 
 function App() {
   const [showNav, setShowNav] = useState(false);

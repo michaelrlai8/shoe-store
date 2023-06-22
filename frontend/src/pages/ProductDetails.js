@@ -25,7 +25,7 @@ const ProductDetails = () => {
   const navigate = useNavigate();
 
   const GET_PRODUCT = gql`
-    query GetProduct($id: ID!) {
+    query Product($id: ID!) {
       product(id: $id) {
         data {
           id
@@ -79,41 +79,27 @@ const ProductDetails = () => {
     }
   `;
 
-  const { loading, error, data } = useQuery(GET_PRODUCT, {
+  // Fetch data
+  const { data, client } = useQuery(GET_PRODUCT, {
     variables: { id },
   });
 
-  if (error) console.log(error);
-
+  // On component update and initial render, check if slug matches slug in database. If not, change it to slug in database
   useEffect(() => {
     if (data && name !== data.product.data.attributes.slug) {
       navigate(`/products/${id}/${data.product.data.attributes.slug}`);
-      console.log(data);
     }
   });
 
-  const capitalizeFirst = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-
-  const previousPhoto = () => {
-    if (currentPhotoIndex > 0) {
-      setCurrentPhotoIndex(currentPhotoIndex - 1);
-    }
-  };
-
-  const nextPhoto = () => {
-    if (
-      currentPhotoIndex <
-      data.product.data.attributes.images.data.length - 1
-    ) {
-      setCurrentPhotoIndex(currentPhotoIndex + 1);
-    }
+  const prefetch = async (id) => {
+    await client.query({
+      query: GET_PRODUCT,
+      variables: { id },
+    });
   };
 
   return (
     <div className='mt-[60px]'>
-      {loading && <div className='lg:mx-12'>Loading</div>}
       {data && (
         <div>
           <div className='w-screen lg:flex'>
@@ -124,10 +110,25 @@ const ProductDetails = () => {
                 className='w-full'
               />
               <div className='absolute right-6 top-6 flex gap-3 text-2xl'>
-                <button onClick={previousPhoto}>
+                <button
+                  onClick={() => {
+                    if (currentPhotoIndex > 0) {
+                      setCurrentPhotoIndex(currentPhotoIndex - 1);
+                    }
+                  }}
+                >
                   <IoChevronBack />
                 </button>
-                <button onClick={nextPhoto}>
+                <button
+                  onClick={() => {
+                    if (
+                      currentPhotoIndex <
+                      data.product.data.attributes.images.data.length - 1
+                    ) {
+                      setCurrentPhotoIndex(currentPhotoIndex + 1);
+                    }
+                  }}
+                >
                   <IoChevronForward />
                 </button>
               </div>
@@ -139,14 +140,20 @@ const ProductDetails = () => {
                   {data.product.data.attributes.name}
                 </div>
                 <div className=''>
-                  {`${capitalizeFirst(
+                  {`${
                     data.product.data.attributes.category.data.attributes.name
-                  )}'s`}
+                      .charAt(0)
+                      .toUpperCase() +
+                    data.product.data.attributes.category.data.attributes.name.slice(
+                      1
+                    )
+                  }'s`}
                 </div>
                 <div>{`$${data.product.data.attributes.price}`}</div>
                 <div className='mt-6 grid grid-cols-5 gap-2'>
                   {data.product.data.attributes.variants.data.map((variant) => (
                     <Link
+                      onMouseOver={() => prefetch(variant.id)}
                       onClick={() => setSelectedSize(0)}
                       to={`/products/${variant.id}`}
                       key={variant.attributes.colorway}
@@ -171,7 +178,7 @@ const ProductDetails = () => {
                   {data.product.data.attributes.sizes.map((size) => (
                     <button
                       onClick={() => setSelectedSize(size)}
-                      key={size}
+                      key={`${id} ${size}`}
                       className={`border border-solid py-2 text-center hover:border-black ${
                         selectedSize === size
                           ? 'border-black'
