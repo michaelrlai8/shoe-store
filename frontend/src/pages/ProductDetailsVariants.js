@@ -4,7 +4,7 @@ import { useQuery, gql } from '@apollo/client';
 import { Link } from 'react-router-dom';
 
 const ProductDetailsVariants = ({ parentId, productId, setSelectedSize }) => {
-  // Query variants from parent product ic
+  // Query variants from parent product id
   const GET_VARIANTS = gql`
     query Variants($parentId: ID!) {
       parentProduct(id: $parentId) {

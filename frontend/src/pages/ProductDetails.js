@@ -4,61 +4,40 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 
 import Footer from '../components/Footer';
+import ProductDetailsDropdowns from './ProductDetailsDropdowns';
 import ProductDetailsSizes from './ProductDetailsSizes';
 import ProductDetailsVariants from './ProductDetailsVariants';
 
-import {
-  IoChevronDown,
-  IoChevronUp,
-  IoChevronBack,
-  IoChevronForward,
-} from 'react-icons/io5';
+import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
 
 const ProductDetails = () => {
-  const [showShippingPolicy, setShowShippingPolicy] = useState(false);
-  const [showSizeGuide, setShowSizeGuide] = useState(false);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState();
 
   const { id, name } = useParams();
   const navigate = useNavigate();
 
-  // Query product details
+  // Query product details from product id
   const GET_PRODUCT = gql`
     query Product($id: ID!) {
       product(id: $id) {
         data {
-          id
           attributes {
             parent_product {
               data {
-                id
+                attributes {
+                  name
+                }
               }
             }
-            name
             description
             price
             color
             sizes
             slug
             colorway
-            variants {
-              data {
-                id
-                attributes {
-                  images {
-                    data {
-                      attributes {
-                        url
-                      }
-                    }
-                  }
-                }
-              }
-            }
             category {
               data {
-                id
                 attributes {
                   name
                 }
@@ -69,9 +48,6 @@ const ProductDetails = () => {
                 id
                 attributes {
                   url
-                  width
-                  height
-                  hash
                 }
               }
             }
@@ -86,15 +62,7 @@ const ProductDetails = () => {
     variables: { id },
   });
 
-  /*  // Query product variants
-  const GET_VARIANTS = gql``;
-
-  // Fetch product variants via parent product
-  const { parentData } = useQuery(GET_VARIANTS, {
-    variables: { id },
-  }); */
-
-  // On component update and initial render, check if slug matches slug in database. If not, change it to slug in database
+  // Check if slug matches slug in database. If not, change it to slug in database
   useEffect(() => {
     if (data && name !== data.product.data.attributes.slug) {
       navigate(`/products/${id}/${data.product.data.attributes.slug}`);
@@ -140,7 +108,10 @@ const ProductDetails = () => {
             <div className='w-full pt-6 lg:w-2/3 lg:pt-0'>
               <div className='px-6 lg:px-12'>
                 <div className='text-3xl'>
-                  {data.product.data.attributes.name}
+                  {
+                    data.product.data.attributes.parent_product.data.attributes
+                      .name
+                  }
                 </div>
                 <div className=''>
                   {`${
@@ -176,56 +147,7 @@ const ProductDetails = () => {
                   </button>
                 </div>
 
-                <div className='mt-6 border-t border-gray-200 py-6'>
-                  <div
-                    onClick={() => setShowSizeGuide(!showSizeGuide)}
-                    className='flex justify-between hover:cursor-pointer'
-                  >
-                    <div className='text-xl'> Sizing Guide</div>
-                    <div className='flex items-center pr-2 text-2xl'>
-                      {showSizeGuide ? <IoChevronUp /> : <IoChevronDown />}
-                    </div>
-                  </div>
-                  {showSizeGuide && (
-                    <div className='pt-6'>
-                      <div>
-                        1. Step on a piece of paper with your heel slightly
-                        touching a wall behind.
-                      </div>
-                      <div>
-                        2. Mark the end of your longest toe on the paper (you
-                        might need a friend to help you) and measure from the
-                        wall to the marking.
-                      </div>
-                      <div>
-                        3. Do the same for the other foot and compare
-                        measurements with our size chart to get the right size.
-                      </div>
-                    </div>
-                  )}
-
-                  <div className='mt-6 border-b border-t border-gray-200 py-6'>
-                    <div
-                      onClick={() => setShowShippingPolicy(!showShippingPolicy)}
-                      className='flex justify-between hover:cursor-pointer'
-                    >
-                      <div className='text-xl'> Shipping & Returns</div>
-                      <div className='flex items-center pr-2 text-2xl'>
-                        {showShippingPolicy ? (
-                          <IoChevronUp />
-                        ) : (
-                          <IoChevronDown />
-                        )}
-                      </div>
-                    </div>
-                    {showShippingPolicy && (
-                      <div className='pt-6'>
-                        Free standard shipping on orders $50+ and free 60-day
-                        returns
-                      </div>
-                    )}
-                  </div>
-                </div>
+                <ProductDetailsDropdowns />
               </div>
             </div>
           </div>
