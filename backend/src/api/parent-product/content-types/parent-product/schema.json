@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "parent_products",
+  "info": {
+    "singularName": "parent-product",
+    "pluralName": "parent-products",
+    "displayName": "parent product"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product",
+      "mappedBy": "parent_product"
+    }
+  }
+}

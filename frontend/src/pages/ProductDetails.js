@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 import { useParams, useNavigate } from 'react-router-dom';
-
 import { useQuery, gql } from '@apollo/client';
 
 import Footer from '../components/Footer';
-
-import { Link } from 'react-router-dom';
+import ProductDetailsSizes from './ProductDetailsSizes';
+import ProductDetailsVariants from './ProductDetailsVariants';
 
 import {
   IoChevronDown,
@@ -24,12 +23,18 @@ const ProductDetails = () => {
   const { id, name } = useParams();
   const navigate = useNavigate();
 
+  // Query product details
   const GET_PRODUCT = gql`
     query Product($id: ID!) {
       product(id: $id) {
         data {
           id
           attributes {
+            parent_product {
+              data {
+                id
+              }
+            }
             name
             description
             price
@@ -41,16 +46,13 @@ const ProductDetails = () => {
               data {
                 id
                 attributes {
-                  name
                   images {
                     data {
-                      id
                       attributes {
                         url
                       }
                     }
                   }
-                  colorway
                 }
               }
             }
@@ -79,10 +81,18 @@ const ProductDetails = () => {
     }
   `;
 
-  // Fetch data
-  const { data, client } = useQuery(GET_PRODUCT, {
+  // Fetch product details
+  const { data } = useQuery(GET_PRODUCT, {
     variables: { id },
   });
+
+  /*  // Query product variants
+  const GET_VARIANTS = gql``;
+
+  // Fetch product variants via parent product
+  const { parentData } = useQuery(GET_VARIANTS, {
+    variables: { id },
+  }); */
 
   // On component update and initial render, check if slug matches slug in database. If not, change it to slug in database
   useEffect(() => {
@@ -90,13 +100,6 @@ const ProductDetails = () => {
       navigate(`/products/${id}/${data.product.data.attributes.slug}`);
     }
   });
-
-  const prefetch = async (id) => {
-    await client.query({
-      query: GET_PRODUCT,
-      variables: { id },
-    });
-  };
 
   return (
     <div className='mt-[60px]'>
@@ -150,45 +153,20 @@ const ProductDetails = () => {
                   }'s`}
                 </div>
                 <div>{`$${data.product.data.attributes.price}`}</div>
-                <div className='mt-6 grid grid-cols-5 gap-2'>
-                  {data.product.data.attributes.variants.data.map((variant) => (
-                    <Link
-                      onMouseOver={() => prefetch(variant.id)}
-                      onClick={() => setSelectedSize(0)}
-                      to={`/products/${variant.id}`}
-                      key={variant.attributes.colorway}
-                      className='relative'
-                    >
-                      <img
-                        src={`${process.env.REACT_APP_API_URL}${variant.attributes.images.data[0].attributes.url}`}
-                        alt=''
-                      />
-                      <div
-                        className={`absolute left-0 top-0 h-full w-full border-solid border-black hover:border ${
-                          variant.id === data.product.data.id ? 'border' : ''
-                        }`}
-                      ></div>
-                    </Link>
-                  ))}
-                </div>
-                <div className='mt-6'>
-                  <div>Sizes</div>
-                </div>
-                <div className='mt-2 grid grid-cols-5 gap-2'>
-                  {data.product.data.attributes.sizes.map((size) => (
-                    <button
-                      onClick={() => setSelectedSize(size)}
-                      key={`${id} ${size}`}
-                      className={`border border-solid py-2 text-center hover:border-black ${
-                        selectedSize === size
-                          ? 'border-black'
-                          : 'border-gray-200'
-                      }`}
-                    >
-                      {size}
-                    </button>
-                  ))}
-                </div>
+
+                <ProductDetailsVariants
+                  parentId={data.product.data.attributes.parent_product.data.id}
+                  productId={data.product.data.id}
+                  setSelectedSize={setSelectedSize}
+                />
+
+                <ProductDetailsSizes
+                  id={id}
+                  sizes={data.product.data.attributes.sizes}
+                  selectedSize={selectedSize}
+                  setSelectedSize={setSelectedSize}
+                />
+
                 <div className='mt-2'>
                   {data.product.data.attributes.colorway}
                 </div>

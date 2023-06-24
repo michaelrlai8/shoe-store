@@ -59,6 +59,12 @@
       "type": "string",
       "required": true,
       "unique": false
+    },
+    "parent_product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::parent-product.parent-product",
+      "inversedBy": "products"
     }
   }
 }
