@@ -65,9 +65,13 @@ const ProductDetails = () => {
   // Check if slug matches slug in database. If not, change it to slug in database
   useEffect(() => {
     if (data && name !== data.product.data.attributes.slug) {
-      navigate(`/products/${id}/${data.product.data.attributes.slug}`);
+      navigate(`/products/${data.product.data.attributes.slug}/${id}`);
     }
   });
+
+  if (data) {
+    console.log(data);
+  }
 
   return (
     <div className='mt-[60px]'>
@@ -84,7 +88,7 @@ const ProductDetails = () => {
                       .name
                   }
                 </div>
-                <div className=''>
+                <div>
                   {`${
                     data.product.data.attributes.category.data.attributes.name
                       .charAt(0)
@@ -116,6 +120,10 @@ const ProductDetails = () => {
                   <button className='w-full bg-black py-4 text-white hover:bg-gray-500'>
                     ADD TO BAG
                   </button>
+                </div>
+
+                <div className='mt-12'>
+                  {data.product.data.attributes.description}
                 </div>
 
                 <ProductDetailsDropdowns />
