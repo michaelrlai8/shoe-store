@@ -55,26 +55,6 @@ const NavBar = ({ showNav, setShowNav }) => {
         </div>
       </div>
 
-      {/*   <Transition
-        show={showShipping}
-        as='div'
-        enter='transition-opacity duration-500'
-        enterFrom='opacity-0'
-        enterTo='opacity-100'
-        leave='transition-opacity duration-500'
-        leaveFrom='opacity-100'
-        leaveTo='opacity-0'
-        className='absolute flex w-screen justify-center bg-red-500 text-white'
-      >
-        <div className='mr-auto'>
-          <IoCloseOutline className='text-red-500' />
-        </div>
-        <div className=''>Now with free shipping on all orders!</div>
-        <button onClick={() => setShowShipping(false)} className='ml-auto pr-1'>
-          <IoCloseOutline className='text-white' />
-        </button>
-      </Transition> */}
-
       <Transition
         show={showNav}
         as='ul'
@@ -86,16 +66,16 @@ const NavBar = ({ showNav, setShowNav }) => {
         leaveTo='opacity-0'
         className='absolute flex h-screen w-full flex-col gap-8 bg-white p-32 text-center text-lg lg:hidden'
       >
-        <NavLink to='/' onClick={handleShowNav}>
+        <NavLink to='/products' onClick={handleShowNav}>
           MEN
         </NavLink>
-        <NavLink to='/' onClick={handleShowNav}>
+        <NavLink to='/products' onClick={handleShowNav}>
           WOMEN
         </NavLink>
-        <NavLink to='/' onClick={handleShowNav}>
+        <NavLink to='/products' onClick={handleShowNav}>
           KIDS
         </NavLink>
-        <NavLink to='/' onClick={handleShowNav}>
+        <NavLink to='/products' onClick={handleShowNav}>
           UNISEX
         </NavLink>
       </Transition>

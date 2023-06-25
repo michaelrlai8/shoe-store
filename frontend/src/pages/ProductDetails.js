@@ -88,7 +88,7 @@ const ProductDetails = () => {
                       .name
                   }
                 </div>
-                <div>
+                <div className='text-gray-500'>
                   {`${
                     data.product.data.attributes.category.data.attributes.name
                       .charAt(0)
@@ -96,7 +96,7 @@ const ProductDetails = () => {
                     data.product.data.attributes.category.data.attributes.name.slice(
                       1
                     )
-                  }'s`}
+                  }'s Shoes`}
                 </div>
                 <div>{`$${data.product.data.attributes.price}`}</div>
 
