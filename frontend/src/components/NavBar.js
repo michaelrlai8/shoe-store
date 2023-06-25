@@ -16,7 +16,7 @@ const NavBar = ({ showNav, setShowNav }) => {
 
   return (
     <div className='fixed top-0 z-10 w-full bg-white'>
-      <div className='flex justify-between px-5 py-4 lg:px-24'>
+      <div className='flex justify-between px-6 py-4 lg:px-12'>
         <div className='flex gap-10'>
           <div className='flex items-center gap-2 text-xl font-extrabold'>
             <Link to='/' onClick={showNav ? handleShowNav : null}>
