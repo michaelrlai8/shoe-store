@@ -4,14 +4,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 
 import Footer from '../components/Footer';
-import ProductDetailsDropdowns from './ProductDetailsDropdowns';
-import ProductDetailsSizes from './ProductDetailsSizes';
-import ProductDetailsVariants from './ProductDetailsVariants';
-
-import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
+import ProductDetailsCarousel from '../components/ProductDetailsCarousel';
+import ProductDetailsDropdowns from '../components/ProductDetailsDropdowns';
+import ProductDetailsSizes from '../components/ProductDetailsSizes';
+import ProductDetailsVariants from '../components/ProductDetailsVariants';
 
 const ProductDetails = () => {
-  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState();
 
   const { id, name } = useParams();
@@ -22,9 +20,11 @@ const ProductDetails = () => {
     query Product($id: ID!) {
       product(id: $id) {
         data {
+          id
           attributes {
             parent_product {
               data {
+                id
                 attributes {
                   name
                 }
@@ -74,36 +74,7 @@ const ProductDetails = () => {
       {data && (
         <div>
           <div className='w-screen lg:flex'>
-            <div className='relative w-full lg:ml-12'>
-              <img
-                src={`${process.env.REACT_APP_API_URL}${data.product.data.attributes.images.data[currentPhotoIndex].attributes.url}`}
-                alt=''
-                className='w-full'
-              />
-              <div className='absolute right-6 top-6 flex gap-3 text-2xl'>
-                <button
-                  onClick={() => {
-                    if (currentPhotoIndex > 0) {
-                      setCurrentPhotoIndex(currentPhotoIndex - 1);
-                    }
-                  }}
-                >
-                  <IoChevronBack />
-                </button>
-                <button
-                  onClick={() => {
-                    if (
-                      currentPhotoIndex <
-                      data.product.data.attributes.images.data.length - 1
-                    ) {
-                      setCurrentPhotoIndex(currentPhotoIndex + 1);
-                    }
-                  }}
-                >
-                  <IoChevronForward />
-                </button>
-              </div>
-            </div>
+            <ProductDetailsCarousel data={data} />
 
             <div className='w-full pt-6 lg:w-2/3 lg:pt-0'>
               <div className='px-6 lg:px-12'>
