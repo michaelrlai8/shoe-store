@@ -3,7 +3,13 @@ import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { Link } from 'react-router-dom';
 
-const ProductDetailsVariants = ({ parentId, productId, setSelectedSize }) => {
+const ProductDetailsVariants = ({
+  parentId,
+  productId,
+  setSelectedSize,
+  client,
+  GET_PRODUCT,
+}) => {
   // Query variants from parent product id
   const GET_VARIANTS = gql`
     query Variants($parentId: ID!) {
@@ -41,6 +47,12 @@ const ProductDetailsVariants = ({ parentId, productId, setSelectedSize }) => {
         <div className='mt-6 grid grid-cols-5 gap-2'>
           {data.parentProduct.data.attributes.products.data.map((variant) => (
             <Link
+              onMouseOver={() => {
+                client.query({
+                  query: GET_PRODUCT,
+                  variables: { id: variant.id },
+                });
+              }}
               onClick={() => setSelectedSize(0)}
               to={`/products/${variant.id}`}
               key={`variant ${variant.id}`}

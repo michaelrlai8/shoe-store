@@ -58,7 +58,7 @@ const ProductDetails = () => {
   `;
 
   // Fetch product details
-  const { data } = useQuery(GET_PRODUCT, {
+  const { data, client } = useQuery(GET_PRODUCT, {
     variables: { id },
   });
 
@@ -67,11 +67,7 @@ const ProductDetails = () => {
     if (data && name !== data.product.data.attributes.slug) {
       navigate(`/products/${data.product.data.attributes.slug}/${id}`);
     }
-  });
-
-  if (data) {
-    console.log(data);
-  }
+  }, [data, name, navigate, id]);
 
   return (
     <div className='mt-[60px]'>
@@ -104,6 +100,8 @@ const ProductDetails = () => {
                   parentId={data.product.data.attributes.parent_product.data.id}
                   productId={data.product.data.id}
                   setSelectedSize={setSelectedSize}
+                  client={client}
+                  GET_PRODUCT={GET_PRODUCT}
                 />
 
                 <ProductDetailsSizes
