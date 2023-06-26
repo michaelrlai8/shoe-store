@@ -10,7 +10,7 @@ import mid from '../assets/mid.jpg';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 
-const Home = () => {
+const Home = ({ setFilters }) => {
   return (
     <div className='absolute top-0  h-screen w-screen'>
       <img
@@ -21,10 +21,11 @@ const Home = () => {
       <div className='absolute bottom-0 flex w-full flex-col gap-4 px-6 py-36 text-white lg:items-end lg:px-20'>
         <div className='text-4xl font-semibold'>This is a shoe store</div>
         <div>You can find shoes for every activity here</div>
-        <Link to='/products'>
-          <button className='bg-white px-10 py-3 font-semibold text-black'>
-            SHOP NOW
-          </button>
+        <Link
+          to='/products'
+          className='w-fit bg-white px-10 py-3 font-semibold text-black'
+        >
+          SHOP NOW
         </Link>
       </div>
 
@@ -35,9 +36,21 @@ const Home = () => {
             <div>
               <div className='text-2xl font-bold'>Men</div>
               <div className='mb-2'>See our mens collection</div>
-              <button className='mb-12 w-48 bg-black py-3 font-semibold text-white'>
-                SHOP MEN
-              </button>
+              <Link to='/products'>
+                <button
+                  onClick={() => {
+                    setFilters({
+                      category: ['men'],
+                      color: [],
+                      size: [],
+                      price: [],
+                    });
+                  }}
+                  className='mb-12 w-48 bg-black py-3 font-semibold text-white'
+                >
+                  SHOP MEN
+                </button>
+              </Link>
             </div>
           </div>
           <div className='w-full flex-grow'>
@@ -45,9 +58,21 @@ const Home = () => {
             <div>
               <div className='text-2xl font-bold'>Women</div>
               <div className='mb-2'>See our womens collection</div>
-              <button className='mb-12 w-48 bg-black py-3 font-semibold text-white'>
-                SHOP WOMEN
-              </button>
+              <Link to='/products'>
+                <button
+                  onClick={() => {
+                    setFilters({
+                      category: ['women'],
+                      color: [],
+                      size: [],
+                      price: [],
+                    });
+                  }}
+                  className='mb-12 w-48 bg-black py-3 font-semibold text-white'
+                >
+                  SHOP WOMEN
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -60,20 +85,25 @@ const Home = () => {
             <div>
               <div className='text-2xl font-bold'>Kids</div>
               <div className='mb-2'>See our kids collection</div>
-              <button className='mb-12 w-48 bg-black py-3 font-semibold text-white'>
-                SHOP KIDS
-              </button>
+              <Link to='/products'>
+                <button
+                  className='mb-12 w-48 bg-black py-3 font-semibold text-white'
+                  onClick={() => {
+                    setFilters({
+                      category: ['kids'],
+                      color: [],
+                      size: [],
+                      price: [],
+                    });
+                  }}
+                >
+                  SHOP KIDS
+                </button>
+              </Link>
             </div>
           </div>
           <div className='w-full flex-grow'>
             <img src={unisex} alt='' className='aspect-square object-cover' />
-            <div>
-              <div className='text-2xl font-bold'>Unisex</div>
-              <div className='mb-2'>See our unisex collection</div>
-              <button className='w-48 bg-black py-3 font-semibold text-white'>
-                SHOP UNISEX
-              </button>
-            </div>
           </div>
         </div>
 

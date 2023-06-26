@@ -93,7 +93,12 @@ const ProductsListing = ({ filters, setFilters, clearFilters }) => {
     <div className='mt-[60px]'>
       <div className='flex h-10 items-center justify-between gap-2 px-6 lg:h-24 lg:px-12'>
         <div className='text-3xl'>
-          {filters.category.length === 1
+          {filters.category[0] === 'kids'
+            ? `${
+                filters.category[0].charAt(0).toUpperCase() +
+                filters.category[0].slice(1)
+              }' Shoes`
+            : filters.category.length === 1
             ? `${
                 filters.category[0].charAt(0).toUpperCase() +
                 filters.category[0].slice(1)
@@ -101,7 +106,17 @@ const ProductsListing = ({ filters, setFilters, clearFilters }) => {
             : 'Shoes'}
         </div>
         <button
-          className='flex items-center gap-2'
+          className='flex items-center gap-2 lg:hidden'
+          onClick={() => {
+            setShowFilters(!showFilters);
+            document.body.classList.toggle('overflow-hidden');
+          }}
+        >
+          Show Filters
+          <GiSettingsKnobs className='text-xl' />
+        </button>
+        <button
+          className='hidden items-center gap-2 lg:flex'
           onClick={() => {
             setShowFilters(!showFilters);
           }}

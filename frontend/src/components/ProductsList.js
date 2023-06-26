@@ -20,12 +20,25 @@ const ProductsList = ({ displayedProducts, clearFilters }) => {
                 <div>
                   {product.attributes.parent_product.data.attributes.name}
                 </div>
-                <div className='text-gray-500'>{`${
-                  product.attributes.category.data.attributes.name
-                    .charAt(0)
-                    .toUpperCase() +
-                  product.attributes.category.data.attributes.name.slice(1)
-                }'s Shoes`}</div>
+                <div className='text-gray-500'>
+                  {product.attributes.category.data.attributes.name === 'kids'
+                    ? `${
+                        product.attributes.category.data.attributes.name
+                          .charAt(0)
+                          .toUpperCase() +
+                        product.attributes.category.data.attributes.name.slice(
+                          1
+                        )
+                      }' Shoes`
+                    : `${
+                        product.attributes.category.data.attributes.name
+                          .charAt(0)
+                          .toUpperCase() +
+                        product.attributes.category.data.attributes.name.slice(
+                          1
+                        )
+                      }'s Shoes`}
+                </div>
                 <div className='pt-2'>{`$${product.attributes.price}`}</div>
               </div>
             </Link>

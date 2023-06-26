@@ -6,7 +6,7 @@ const ProductsFiltersListCategories = ({
   handleCategoryFilter,
 }) => {
   return (
-    <div className='flex flex-col gap-4 lg:gap-1.5'>
+    <div className='flex flex-col gap-4 border-b border-gray-200 pb-6 lg:mr-12 lg:gap-1.5'>
       <div className='pb-2 text-lg'>Category</div>
       {categoryNames.map((category) => (
         <label
