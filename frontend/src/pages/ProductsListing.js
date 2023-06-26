@@ -89,6 +89,8 @@ const ProductsListing = ({ filters, setFilters }) => {
         <ProductsFiltersList
           showFilters={showFilters}
           setShowFilters={setShowFilters}
+          filters={filters}
+          setFilters={setFilters}
         />
         <ProductsList arrangedProducts={arrangedProducts} />
       </div>

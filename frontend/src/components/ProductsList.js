@@ -21,7 +21,7 @@ const ProductsList = ({ arrangedProducts }) => {
                     .charAt(0)
                     .toUpperCase() +
                   product.attributes.category.data.attributes.name.slice(1)
-                } Shoes`}</div>
+                }'s Shoes`}</div>
                 <div className='pt-2'>{`$${product.attributes.price}`}</div>
               </div>
             </Link>
