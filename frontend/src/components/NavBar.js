@@ -4,11 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 import { Transition } from '@headlessui/react';
 
-import {
-  IoBagCheckOutline,
-  IoPersonOutline,
-  IoCloseOutline,
-} from 'react-icons/io5';
+import { IoBagCheckOutline, IoPersonOutline } from 'react-icons/io5';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { GiConverseShoe } from 'react-icons/gi';
 

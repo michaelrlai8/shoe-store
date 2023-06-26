@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Transition } from '@headlessui/react';
 
 const ProductsList = ({ arrangedProducts }) => {
   return (
