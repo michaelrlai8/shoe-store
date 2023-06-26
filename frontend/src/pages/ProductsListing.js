@@ -7,8 +7,9 @@ import { GiSettingsKnobs } from 'react-icons/gi';
 import ProductsFiltersList from '../components/ProductsFiltersList';
 import ProductsList from '../components/ProductsList';
 
-const ProductsListing = ({ filters, setFilters }) => {
-  const [arrangedProducts, setArrangedProducts] = useState();
+const ProductsListing = ({ filters, setFilters, clearFilters }) => {
+  const [allProducts, setAllProducts] = useState();
+  const [displayedProducts, setDisplayedProducts] = useState();
   const [showFilters, setShowFilters] = useState(false);
 
   const GET_PRODUCTS = gql`
@@ -66,14 +67,39 @@ const ProductsListing = ({ filters, setFilters }) => {
       };
       const shuffledArray = shuffleArray(data.products.data);
 
-      setArrangedProducts(shuffledArray);
+      setAllProducts(shuffledArray);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (filters.category.length > 0 && allProducts) {
+      const result = allProducts.filter((product) => {
+        if (
+          filters.category.indexOf(
+            product.attributes.category.data.attributes.name
+          ) >= 0
+        ) {
+          return true;
+        }
+      });
+
+      setDisplayedProducts(result);
+    } else {
+      setDisplayedProducts(allProducts);
+    }
+  }, [allProducts, filters]);
 
   return (
     <div className='mt-[60px]'>
       <div className='flex h-10 items-center justify-between gap-2 px-6 lg:h-24 lg:px-12'>
-        <div className='text-3xl'>Shoes</div>
+        <div className='text-3xl'>
+          {filters.category.length === 1
+            ? `${
+                filters.category[0].charAt(0).toUpperCase() +
+                filters.category[0].slice(1)
+              }'s Shoes`
+            : 'Shoes'}
+        </div>
         <button
           className='flex items-center gap-2'
           onClick={() => {
@@ -92,7 +118,10 @@ const ProductsListing = ({ filters, setFilters }) => {
           filters={filters}
           setFilters={setFilters}
         />
-        <ProductsList arrangedProducts={arrangedProducts} />
+        <ProductsList
+          displayedProducts={displayedProducts}
+          clearFilters={clearFilters}
+        />
       </div>
     </div>
   );

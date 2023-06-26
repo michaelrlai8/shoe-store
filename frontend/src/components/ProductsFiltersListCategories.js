@@ -7,14 +7,17 @@ const ProductsFiltersListCategories = ({
 }) => {
   return (
     <div className='flex flex-col gap-4 lg:gap-1.5'>
-      <div className='pb-2'>Category</div>
+      <div className='pb-2 text-lg'>Category</div>
       {categoryNames.map((category) => (
-        <label className='flex items-center gap-1.5 hover:cursor-pointer hover:text-gray-500'>
+        <label
+          key={category}
+          className='flex items-center gap-1.5 hover:cursor-pointer hover:text-gray-500'
+        >
           <input
             type='checkbox'
-            className='h-5 w-5  text-black focus:ring-0'
+            className='h-[18px] w-[18px]  text-black focus:ring-0'
             checked={filters.category.includes(category)}
-            onClick={() => handleCategoryFilter(category)}
+            onChange={() => handleCategoryFilter(category)}
           />
           <div>{category.charAt(0).toUpperCase() + category.slice(1)}</div>
         </label>

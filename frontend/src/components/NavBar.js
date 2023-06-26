@@ -8,7 +8,7 @@ import { IoBagCheckOutline, IoPersonOutline } from 'react-icons/io5';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { GiConverseShoe } from 'react-icons/gi';
 
-const NavBar = ({ showNav, setShowNav }) => {
+const NavBar = ({ showNav, setShowNav, setFilters }) => {
   const handleShowNav = () => {
     setShowNav(!showNav);
     document.body.classList.toggle('overflow-hidden');
@@ -22,19 +22,107 @@ const NavBar = ({ showNav, setShowNav }) => {
             <Link to='/' onClick={showNav ? handleShowNav : null}>
               <GiConverseShoe className='text-2xl' />
             </Link>
-            <Link to='/' onClick={showNav ? handleShowNav : null}>
+            <Link
+              to='/'
+              onClick={
+                showNav
+                  ? () => {
+                      handleShowNav();
+                      setFilters({
+                        category: [],
+                        color: [],
+                        size: [],
+                        price: [],
+                      });
+                    }
+                  : () => {
+                      setFilters({
+                        category: [],
+                        color: [],
+                        size: [],
+                        price: [],
+                      });
+                    }
+              }
+            >
               shoestore
             </Link>
           </div>
 
           <ul className='mt-1 hidden items-center gap-6 text-sm lg:flex'>
-            <NavLink to='/products' onClick={showNav ? handleShowNav : null}>
+            <NavLink
+              to='/products'
+              onClick={
+                showNav
+                  ? () => {
+                      handleShowNav();
+                      setFilters({
+                        category: ['men'],
+                        color: [],
+                        size: [],
+                        price: [],
+                      });
+                    }
+                  : () => {
+                      setFilters({
+                        category: ['men'],
+                        color: [],
+                        size: [],
+                        price: [],
+                      });
+                    }
+              }
+            >
               MEN
             </NavLink>
-            <NavLink to='/products' onClick={showNav ? handleShowNav : null}>
+            <NavLink
+              to='/products'
+              onClick={
+                showNav
+                  ? () => {
+                      handleShowNav();
+                      setFilters({
+                        category: ['women'],
+                        color: [],
+                        size: [],
+                        price: [],
+                      });
+                    }
+                  : () => {
+                      setFilters({
+                        category: ['women'],
+                        color: [],
+                        size: [],
+                        price: [],
+                      });
+                    }
+              }
+            >
               WOMEN
             </NavLink>
-            <NavLink to='/products' onClick={showNav ? handleShowNav : null}>
+            <NavLink
+              to='/products'
+              onClick={
+                showNav
+                  ? () => {
+                      handleShowNav();
+                      setFilters({
+                        category: ['kids'],
+                        color: [],
+                        size: [],
+                        price: [],
+                      });
+                    }
+                  : () => {
+                      setFilters({
+                        category: ['kids'],
+                        color: [],
+                        size: [],
+                        price: [],
+                      });
+                    }
+              }
+            >
               KIDS
             </NavLink>
           </ul>
@@ -64,13 +152,46 @@ const NavBar = ({ showNav, setShowNav }) => {
         leaveTo='translate-x-full'
         className='absolute flex h-screen w-full flex-col gap-8 bg-white p-32 text-center text-lg lg:hidden'
       >
-        <NavLink to='/products' onClick={handleShowNav}>
+        <NavLink
+          to='/products'
+          onClick={() => {
+            handleShowNav();
+            setFilters({
+              category: ['men'],
+              color: [],
+              size: [],
+              price: [],
+            });
+          }}
+        >
           MEN
         </NavLink>
-        <NavLink to='/products' onClick={handleShowNav}>
+        <NavLink
+          to='/products'
+          onClick={() => {
+            handleShowNav();
+            setFilters({
+              category: ['women'],
+              color: [],
+              size: [],
+              price: [],
+            });
+          }}
+        >
           WOMEN
         </NavLink>
-        <NavLink to='/products' onClick={handleShowNav}>
+        <NavLink
+          to='/products'
+          onClick={() => {
+            handleShowNav();
+            setFilters({
+              category: ['kids'],
+              color: [],
+              size: [],
+              price: [],
+            });
+          }}
+        >
           KIDS
         </NavLink>
       </Transition>

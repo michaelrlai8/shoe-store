@@ -1,13 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ProductsList = ({ arrangedProducts }) => {
+const ProductsList = ({ displayedProducts, clearFilters }) => {
   return (
     <div>
-      {arrangedProducts && (
+      {displayedProducts && (
         <div className='grid grid-cols-2 gap-1 lg:grid-cols-3 lg:gap-4'>
-          {arrangedProducts.map((product) => (
-            <Link key={`product ${product.id}`} to={`/products/${product.id}`}>
+          {displayedProducts.map((product) => (
+            <Link
+              key={`product ${product.id}`}
+              to={`/products/${product.id}`}
+              onClick={clearFilters}
+            >
               <img
                 src={`${process.env.REACT_APP_API_URL}${product.attributes.images.data[0].attributes.url}`}
                 alt=''

@@ -17,16 +17,33 @@ function App() {
     price: [],
   });
 
+  const clearFilters = () => {
+    setFilters({
+      category: [],
+      color: [],
+      size: [],
+      price: [],
+    });
+  };
+
   return (
     <div className='App relative flex h-full flex-col'>
-      <NavBar showNav={showNav} setShowNav={setShowNav} />
+      <NavBar
+        showNav={showNav}
+        setShowNav={setShowNav}
+        setFilters={setFilters}
+      />
 
       <Routes>
         <Route path='/' element={<Home />} />
         <Route
           path='/products'
           element={
-            <ProductsListing filters={filters} setFilters={setFilters} />
+            <ProductsListing
+              filters={filters}
+              setFilters={setFilters}
+              clearFilters={clearFilters}
+            />
           }
         />
         <Route path={`/products/:id`} element={<ProductDetails />} />
