@@ -4,7 +4,8 @@
   "info": {
     "singularName": "category",
     "pluralName": "categories",
-    "displayName": "category"
+    "displayName": "category",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,7 +20,8 @@
     },
     "name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "unique": true
     }
   }
 }

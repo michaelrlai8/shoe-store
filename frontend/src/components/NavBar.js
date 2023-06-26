@@ -4,7 +4,11 @@ import { Link, NavLink } from 'react-router-dom';
 
 import { Transition } from '@headlessui/react';
 
-import { IoBagCheckOutline, IoPersonOutline } from 'react-icons/io5';
+import {
+  IoBagCheckOutline,
+  IoPersonOutline,
+  IoCloseOutline,
+} from 'react-icons/io5';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { GiConverseShoe } from 'react-icons/gi';
 
@@ -26,6 +30,7 @@ const NavBar = ({ showNav, setShowNav }) => {
               shoestore
             </Link>
           </div>
+
           <ul className='mt-1 hidden items-center gap-6 text-sm lg:flex'>
             <NavLink to='/products' onClick={showNav ? handleShowNav : null}>
               MEN
@@ -35,9 +40,6 @@ const NavBar = ({ showNav, setShowNav }) => {
             </NavLink>
             <NavLink to='/products' onClick={showNav ? handleShowNav : null}>
               KIDS
-            </NavLink>
-            <NavLink to='/products' onClick={showNav ? handleShowNav : null}>
-              UNISEX
             </NavLink>
           </ul>
         </div>
@@ -58,12 +60,12 @@ const NavBar = ({ showNav, setShowNav }) => {
       <Transition
         show={showNav}
         as='ul'
-        enter='transition-opacity duration-500'
-        enterFrom='opacity-0'
-        enterTo='opacity-100'
-        leave='transition-opacity duration-0'
-        leaveFrom='opacity-100'
-        leaveTo='opacity-0'
+        enter='transition-all duration-200 transform ease-out'
+        enterFrom='translate-x-full'
+        enterTo='translate-x-0'
+        leave='transition-all duration-200 transform ease-in'
+        leaveFrom='translate-x-0'
+        leaveTo='translate-x-full'
         className='absolute flex h-screen w-full flex-col gap-8 bg-white p-32 text-center text-lg lg:hidden'
       >
         <NavLink to='/products' onClick={handleShowNav}>
@@ -74,9 +76,6 @@ const NavBar = ({ showNav, setShowNav }) => {
         </NavLink>
         <NavLink to='/products' onClick={handleShowNav}>
           KIDS
-        </NavLink>
-        <NavLink to='/products' onClick={handleShowNav}>
-          UNISEX
         </NavLink>
       </Transition>
     </div>

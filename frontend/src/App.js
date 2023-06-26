@@ -5,11 +5,17 @@ import { Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar';
 
 import Home from './pages/Home';
-import Products from './pages/Products';
+import ProductsListing from './pages/ProductsListing';
 import ProductDetails from './pages/ProductDetails';
 
 function App() {
   const [showNav, setShowNav] = useState(false);
+  const [filters, setFilters] = useState({
+    category: [],
+    color: [],
+    size: [],
+    price: [],
+  });
 
   return (
     <div className='App relative flex h-full flex-col'>
@@ -17,7 +23,12 @@ function App() {
 
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/products' element={<Products />} />
+        <Route
+          path='/products'
+          element={
+            <ProductsListing filters={filters} setFilters={setFilters} />
+          }
+        />
         <Route path={`/products/:id`} element={<ProductDetails />} />
         <Route path={`/products/:name/:id`} element={<ProductDetails />} />
       </Routes>
