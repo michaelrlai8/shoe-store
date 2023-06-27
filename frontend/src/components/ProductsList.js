@@ -13,7 +13,7 @@ const ProductsList = ({ displayedProducts, clearFilters }) => {
               onClick={clearFilters}
             >
               <img
-                src={`${process.env.REACT_APP_API_URL}${product.attributes.images.data[0].attributes.url}`}
+                src={product.attributes.images.data[0]?.attributes.url}
                 alt=''
               />
               <div className='pb-4 pl-2 pt-2'>

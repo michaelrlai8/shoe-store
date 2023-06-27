@@ -59,7 +59,7 @@ const ProductDetailsVariants = ({
               className='relative'
             >
               <img
-                src={`${process.env.REACT_APP_API_URL}${variant.attributes.images.data[0].attributes.url}`}
+                src={variant.attributes.images.data[0]?.attributes.url}
                 alt=''
               />
               <div

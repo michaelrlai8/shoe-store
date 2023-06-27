@@ -14,7 +14,7 @@ const ProductsListing = ({ filters, setFilters, clearFilters }) => {
 
   const GET_PRODUCTS = gql`
     query Products {
-      products {
+      products(pagination: { limit: 100 }) {
         data {
           id
           attributes {
@@ -48,10 +48,12 @@ const ProductsListing = ({ filters, setFilters, clearFilters }) => {
     }
   `;
 
-  const { data } = useQuery(GET_PRODUCTS);
+  const { loading, error, data } = useQuery(GET_PRODUCTS);
 
   useEffect(() => {
     if (data) {
+      console.log('data:');
+      console.log(data);
       const shuffleArray = (array) => {
         const shuffledArray = [...array];
 
@@ -92,7 +94,7 @@ const ProductsListing = ({ filters, setFilters, clearFilters }) => {
   return (
     <div className='mt-[60px]'>
       <div className='flex h-10 items-center justify-between gap-2 px-6 lg:h-24 lg:px-12'>
-        <div className='text-3xl'>
+        <div className='text-2xl'>
           {filters.category[0] === 'kids'
             ? `${
                 filters.category[0].charAt(0).toUpperCase() +
@@ -104,6 +106,7 @@ const ProductsListing = ({ filters, setFilters, clearFilters }) => {
                 filters.category[0].slice(1)
               }'s Shoes`
             : 'Shoes'}
+          {` (${displayedProducts?.length})`}
         </div>
         <button
           className='flex items-center gap-2 lg:hidden'
