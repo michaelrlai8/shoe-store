@@ -10,6 +10,7 @@ import ProductDetails from './pages/ProductDetails';
 
 function App() {
   const [showNav, setShowNav] = useState(false);
+
   const [filters, setFilters] = useState({
     category: [],
     color: [],
