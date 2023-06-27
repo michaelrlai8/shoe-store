@@ -83,6 +83,7 @@ const ProductsListing = ({ filters, setFilters, clearFilters }) => {
         ) {
           return true;
         }
+        return false;
       });
 
       setDisplayedProducts(result);
