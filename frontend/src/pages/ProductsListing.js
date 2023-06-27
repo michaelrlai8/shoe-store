@@ -48,7 +48,7 @@ const ProductsListing = ({ filters, setFilters, clearFilters }) => {
     }
   `;
 
-  const { loading, error, data } = useQuery(GET_PRODUCTS);
+  const { data } = useQuery(GET_PRODUCTS);
 
   useEffect(() => {
     if (data) {
