@@ -68,7 +68,7 @@ const ProductsFiltersList = ({
                   setShowFilters(!showFilters);
                   document.body.classList.toggle('overflow-hidden');
                 }}
-                className='bg-black text-white'
+                className='bg-black py-2 text-white'
               >
                 APPLY
               </button>

@@ -9,6 +9,7 @@ const ProductDetailsVariants = ({
   setSelectedSize,
   client,
   GET_PRODUCT,
+  setSelectedSizeError,
 }) => {
   // Query variants from parent product id
   const GET_VARIANTS = gql`
@@ -53,7 +54,10 @@ const ProductDetailsVariants = ({
                   variables: { id: variant.id },
                 });
               }}
-              onClick={() => setSelectedSize(0)}
+              onClick={() => {
+                setSelectedSize(0);
+                setSelectedSizeError(false);
+              }}
               to={`/products/${variant.id}`}
               key={`variant ${variant.id}`}
               className='relative'

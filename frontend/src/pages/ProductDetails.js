@@ -8,9 +8,12 @@ import ProductDetailsCarousel from '../components/ProductDetailsCarousel';
 import ProductDetailsDropdowns from '../components/ProductDetailsDropdowns';
 import ProductDetailsSizes from '../components/ProductDetailsSizes';
 import ProductDetailsVariants from '../components/ProductDetailsVariants';
+import ProductAddedPopup from '../components/ProductAddedPopup';
 
 const ProductDetails = () => {
   const [selectedSize, setSelectedSize] = useState();
+  const [selectedSizeError, setSelectedSizeError] = useState(false);
+  const [showProductAddedPopup, setShowProductAddedPopup] = useState(false);
 
   const { id, name } = useParams();
   const navigate = useNavigate();
@@ -69,6 +72,16 @@ const ProductDetails = () => {
     }
   }, [data, name, navigate, id]);
 
+  const handleAddToBag = () => {
+    if (!selectedSize) {
+      setSelectedSizeError(true);
+    } else {
+      setShowProductAddedPopup(true);
+
+      const addItem = () => {};
+    }
+  };
+
   return (
     <div className='mt-[60px]'>
       {data && (
@@ -102,6 +115,7 @@ const ProductDetails = () => {
                   setSelectedSize={setSelectedSize}
                   client={client}
                   GET_PRODUCT={GET_PRODUCT}
+                  setSelectedSizeError={setSelectedSizeError}
                 />
 
                 <ProductDetailsSizes
@@ -109,13 +123,18 @@ const ProductDetails = () => {
                   sizes={data.product.data.attributes.sizes}
                   selectedSize={selectedSize}
                   setSelectedSize={setSelectedSize}
+                  selectedSizeError={selectedSizeError}
+                  setSelectedSizeError={setSelectedSizeError}
                 />
 
                 <div className='mt-2'>
                   {data.product.data.attributes.colorway}
                 </div>
                 <div className='mt-6 text-center'>
-                  <button className='w-full bg-black py-4 text-white hover:bg-gray-500'>
+                  <button
+                    onClick={handleAddToBag}
+                    className='w-full bg-black py-4 text-white hover:bg-gray-500'
+                  >
                     ADD TO BAG
                   </button>
                 </div>
@@ -128,6 +147,13 @@ const ProductDetails = () => {
               </div>
             </div>
           </div>
+          {showProductAddedPopup && (
+            <ProductAddedPopup
+              data={data}
+              selectedSize={selectedSize}
+              setShowProductAddedPopup={setShowProductAddedPopup}
+            />
+          )}
           <Footer />
         </div>
       )}

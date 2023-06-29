@@ -1,54 +1,20 @@
 import React, { useState, useEffect } from 'react';
 
-import { useQuery, gql } from '@apollo/client';
-
 import { GiSettingsKnobs } from 'react-icons/gi';
 
 import ProductsFiltersList from '../components/ProductsFiltersList';
 import ProductsList from '../components/ProductsList';
 
-const ProductsListing = ({ filters, setFilters, clearFilters }) => {
+const ProductsListing = ({
+  data,
+  GET_PRODUCTS,
+  filters,
+  setFilters,
+  clearFilters,
+}) => {
   const [allProducts, setAllProducts] = useState();
   const [displayedProducts, setDisplayedProducts] = useState();
   const [showFilters, setShowFilters] = useState(false);
-
-  const GET_PRODUCTS = gql`
-    query Products {
-      products(pagination: { limit: 100 }) {
-        data {
-          id
-          attributes {
-            parent_product {
-              data {
-                id
-                attributes {
-                  name
-                }
-              }
-            }
-            price
-            category {
-              data {
-                attributes {
-                  name
-                }
-              }
-            }
-            images {
-              data {
-                id
-                attributes {
-                  url
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `;
-
-  const { data } = useQuery(GET_PRODUCTS);
 
   useEffect(() => {
     if (data) {
