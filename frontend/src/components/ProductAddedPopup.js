@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import { IoCloseOutline } from 'react-icons/io5';
 import { FaCheckCircle } from 'react-icons/fa';
 
@@ -27,8 +29,8 @@ const ProductAddedPopup = ({
             />
           </button>
         </div>
-        <div className='flex pt-6'>
-          <div className='h-40 w-40 pr-6'>
+        <div className='flex gap-6 pt-6'>
+          <div className='h-40 w-40'>
             <img
               src={data.product.data.attributes.images.data[0].attributes.url}
               alt=''
@@ -53,12 +55,14 @@ const ProductAddedPopup = ({
           </div>
         </div>
         <div className='grid grid-cols-2 gap-2 pt-6'>
-          <button
+          <Link
+            to='/cart'
             onClick={() => setShowProductAddedPopup(false)}
-            className='border border-gray-200 py-2'
+            className='border border-gray-200 py-2 text-center'
           >
             View Bag
-          </button>
+          </Link>
+
           <button
             onClick={() => setShowProductAddedPopup(false)}
             className='bg-black py-2 text-white'

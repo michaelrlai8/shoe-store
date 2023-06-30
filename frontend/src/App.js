@@ -12,6 +12,7 @@ import Cart from './pages/Cart';
 
 function App() {
   const [cart, setCart] = useState([]);
+  const [cartQuantity, setCartQuantity] = useState(0);
 
   const [showNav, setShowNav] = useState(false);
   const [filters, setFilters] = useState({
@@ -65,19 +66,18 @@ function App() {
       }
     }
   `;
-
   const { data } = useQuery(GET_PRODUCTS);
 
-  let localCart = localStorage.getItem('cart');
-
-  const addItem = (item) => {};
-  const updateItem = (itemID, amount) => {};
-  const removeItem = (itemID) => {};
-
   useEffect(() => {
-    localCart = JSON.parse(localCart);
-
-    if (localCart) setCart(localCart);
+    const localCart = localStorage.getItem('cart');
+    if (localCart) {
+      setCart(JSON.parse(localCart));
+      setCartQuantity(
+        JSON.parse(localCart).reduce((a, b) => {
+          return a + b.quantity;
+        }, 0)
+      );
+    }
   }, []);
 
   return (
@@ -86,6 +86,7 @@ function App() {
         showNav={showNav}
         setShowNav={setShowNav}
         setFilters={setFilters}
+        cartQuantity={cartQuantity}
       />
 
       <Routes>
@@ -104,10 +105,31 @@ function App() {
           }
         />
 
-        <Route path={`/products/:id`} element={<ProductDetails />} />
-        <Route path={`/products/:name/:id`} element={<ProductDetails />} />
+        <Route
+          path={`/products/:id`}
+          element={
+            <ProductDetails
+              setCart={setCart}
+              cart={cart}
+              setCartQuantity={setCartQuantity}
+            />
+          }
+        />
+        <Route
+          path={`/products/:name/:id`}
+          element={
+            <ProductDetails
+              setCart={setCart}
+              cart={cart}
+              setCartQuantity={setCartQuantity}
+            />
+          }
+        />
 
-        <Route path={`/cart`} element={<Cart />} />
+        <Route
+          path={`/cart`}
+          element={<Cart cart={cart} setCart={setCart} />}
+        />
       </Routes>
     </div>
   );

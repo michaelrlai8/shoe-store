@@ -8,11 +8,15 @@ import { IoBagCheckOutline, IoPersonOutline } from 'react-icons/io5';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { GiConverseShoe } from 'react-icons/gi';
 
-const NavBar = ({ showNav, setShowNav, setFilters }) => {
+const NavBar = ({ cart, cartQuantity, showNav, setShowNav, setFilters }) => {
   const handleShowNav = () => {
     setShowNav(!showNav);
     document.body.classList.toggle('overflow-hidden');
   };
+
+  if (cart) {
+    console.log(cart);
+  }
 
   return (
     <div className='fixed top-0 z-10 w-full bg-white'>
@@ -129,9 +133,21 @@ const NavBar = ({ showNav, setShowNav, setFilters }) => {
         </div>
 
         <div className='flex items-center gap-4'>
-          <button onClick={showNav ? handleShowNav : null}>
+          <Link
+            to='/cart'
+            onClick={showNav ? handleShowNav : null}
+            className='relative'
+          >
             <IoBagCheckOutline className='text-xl' />
-          </button>
+            <div
+              className={`absolute left-[12px] top-[-8px] flex h-[18px] w-[18px] items-center justify-center rounded-full bg-gray-300 text-[10px] ${
+                cartQuantity ? '' : 'hidden'
+              }`}
+            >
+              {cartQuantity}
+            </div>
+          </Link>
+
           <button onClick={showNav ? handleShowNav : null}>
             <IoPersonOutline className='text-xl' />
           </button>

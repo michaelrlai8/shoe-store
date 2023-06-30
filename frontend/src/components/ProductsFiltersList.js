@@ -49,7 +49,7 @@ const ProductsFiltersList = ({
             />
           </div>
           <div className=''>
-            <div className='grid grid-cols-2 gap-2 border-t border-gray-200 pt-6 lg:hidden'>
+            <div className='grid grid-cols-2 gap-2 pt-6 lg:hidden'>
               <button
                 onClick={() => {
                   setFilters({

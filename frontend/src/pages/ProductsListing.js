@@ -18,8 +18,6 @@ const ProductsListing = ({
 
   useEffect(() => {
     if (data) {
-      console.log('data:');
-      console.log(data);
       const shuffleArray = (array) => {
         const shuffledArray = [...array];
 

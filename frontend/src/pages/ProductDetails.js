@@ -10,7 +10,7 @@ import ProductDetailsSizes from '../components/ProductDetailsSizes';
 import ProductDetailsVariants from '../components/ProductDetailsVariants';
 import ProductAddedPopup from '../components/ProductAddedPopup';
 
-const ProductDetails = () => {
+const ProductDetails = ({ cart, setCart, cartQuantity, setCartQuantity }) => {
   const [selectedSize, setSelectedSize] = useState();
   const [selectedSizeError, setSelectedSizeError] = useState(false);
   const [showProductAddedPopup, setShowProductAddedPopup] = useState(false);
@@ -78,7 +78,37 @@ const ProductDetails = () => {
     } else {
       setShowProductAddedPopup(true);
 
-      const addItem = () => {};
+      const item = {
+        id: data.product.data.id,
+        name: data.product.data.attributes.parent_product.data.attributes.name,
+        category: data.product.data.attributes.category.data.attributes.name,
+        colorway: data.product.data.attributes.colorway,
+        sizes: data.product.data.attributes.sizes,
+        selectedSize: selectedSize,
+        quantity: 1,
+        price: data.product.data.attributes.price,
+        image: data.product.data.attributes.images.data[0].attributes.url,
+      };
+
+      const checkDuplicate = cart.findIndex(
+        (product) =>
+          product.id === item.id && product.selectedSize === item.selectedSize
+      );
+
+      let tempCart;
+      if (checkDuplicate > -1) {
+        tempCart = [...cart];
+        tempCart[checkDuplicate].quantity += 1;
+      } else {
+        tempCart = [...cart, item];
+      }
+      setCart(tempCart);
+      setCartQuantity(
+        tempCart.reduce((a, b) => {
+          return a + b.quantity;
+        }, 0)
+      );
+      localStorage.setItem('cart', JSON.stringify(tempCart));
     }
   };
 
@@ -98,14 +128,24 @@ const ProductDetails = () => {
                   }
                 </div>
                 <div className='text-gray-500'>
-                  {`${
-                    data.product.data.attributes.category.data.attributes.name
-                      .charAt(0)
-                      .toUpperCase() +
-                    data.product.data.attributes.category.data.attributes.name.slice(
-                      1
-                    )
-                  }'s Shoes`}
+                  {data.product.data.attributes.category.data.attributes
+                    .name === 'kids'
+                    ? `${
+                        data.product.data.attributes.category.data.attributes.name
+                          .charAt(0)
+                          .toUpperCase() +
+                        data.product.data.attributes.category.data.attributes.name.slice(
+                          1
+                        )
+                      }' Shoes`
+                    : `${
+                        data.product.data.attributes.category.data.attributes.name
+                          .charAt(0)
+                          .toUpperCase() +
+                        data.product.data.attributes.category.data.attributes.name.slice(
+                          1
+                        )
+                      }'s Shoes`}
                 </div>
                 <div>{`$${data.product.data.attributes.price}`}</div>
 
