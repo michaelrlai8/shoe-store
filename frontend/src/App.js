@@ -71,12 +71,18 @@ function App() {
   useEffect(() => {
     const localCart = localStorage.getItem('cart');
     if (localCart) {
-      setCart(JSON.parse(localCart));
       setCartQuantity(
         JSON.parse(localCart).reduce((a, b) => {
           return a + b.quantity;
         }, 0)
       );
+    }
+  }, [cart]);
+
+  useEffect(() => {
+    const localCart = localStorage.getItem('cart');
+    if (localCart) {
+      setCart(JSON.parse(localCart));
     }
   }, []);
 

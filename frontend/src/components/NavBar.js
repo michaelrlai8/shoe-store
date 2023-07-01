@@ -132,7 +132,7 @@ const NavBar = ({ cart, cartQuantity, showNav, setShowNav, setFilters }) => {
           </ul>
         </div>
 
-        <div className='flex items-center gap-4'>
+        <div className='flex items-center gap-6'>
           <Link
             to='/cart'
             onClick={showNav ? handleShowNav : null}
