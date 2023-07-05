@@ -22,7 +22,7 @@ const NavBar = ({ cart, cartQuantity, showNav, setShowNav, setFilters }) => {
     <div className='fixed top-0 z-10 w-full bg-white'>
       <div className='flex justify-between px-6 py-4 lg:px-12'>
         <div className='flex gap-10'>
-          <div className='flex items-center gap-2 text-xl font-extrabold'>
+          <div className='flex items-center gap-2 text-xl font-bold'>
             <Link to='/' onClick={showNav ? handleShowNav : null}>
               <GiConverseShoe className='text-2xl' />
             </Link>

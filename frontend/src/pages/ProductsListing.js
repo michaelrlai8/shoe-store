@@ -38,8 +38,9 @@ const ProductsListing = ({
   }, [data]);
 
   useEffect(() => {
+    let result;
     if (filters.category.length > 0 && allProducts) {
-      const result = allProducts.filter((product) => {
+      result = allProducts.filter((product) => {
         if (
           filters.category.indexOf(
             product.attributes.category.data.attributes.name
@@ -49,18 +50,48 @@ const ProductsListing = ({
         }
         return false;
       });
-
-      setDisplayedProducts(result);
     } else {
-      setDisplayedProducts(allProducts);
+      result = allProducts;
     }
+
+    if (filters.price.length > 0 && allProducts) {
+      let newResult = result;
+      result = newResult.filter((product) => {
+        if (
+          filters.price.indexOf('$0 - $49') >= 0 &&
+          product.attributes.price < 50
+        ) {
+          return true;
+        } else if (
+          filters.price.indexOf('$50 - $99') >= 0 &&
+          product.attributes.price >= 50 &&
+          product.attributes.price < 100
+        ) {
+          return true;
+        } else if (
+          filters.price.indexOf('$100 - $149') >= 0 &&
+          product.attributes.price >= 100 &&
+          product.attributes.price < 150
+        ) {
+          return true;
+        } else if (
+          filters.price.indexOf('$150+') >= 0 &&
+          product.attributes.price >= 150
+        ) {
+          return true;
+        }
+        return false;
+      });
+    }
+
+    setDisplayedProducts(result);
   }, [allProducts, filters]);
 
   return (
     <div className='mt-[60px]'>
       <div className='flex h-10 items-center justify-between gap-2 px-6 lg:h-24 lg:px-12'>
         <div className='text-2xl'>
-          {filters.category[0] === 'kids'
+          {filters.category[0] === 'kids' && filters.category.length === 1
             ? `${
                 filters.category[0].charAt(0).toUpperCase() +
                 filters.category[0].slice(1)

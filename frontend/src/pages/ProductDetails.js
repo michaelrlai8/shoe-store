@@ -9,6 +9,7 @@ import ProductDetailsDropdowns from '../components/ProductDetailsDropdowns';
 import ProductDetailsSizes from '../components/ProductDetailsSizes';
 import ProductDetailsVariants from '../components/ProductDetailsVariants';
 import ProductAddedPopup from '../components/ProductAddedPopup';
+import Button from '../components/Button';
 
 const ProductDetails = ({ cart, setCart, cartQuantity, setCartQuantity }) => {
   const [selectedSize, setSelectedSize] = useState();
@@ -171,12 +172,9 @@ const ProductDetails = ({ cart, setCart, cartQuantity, setCartQuantity }) => {
                   {data.product.data.attributes.colorway}
                 </div>
                 <div className='mt-6 text-center'>
-                  <button
-                    onClick={handleAddToBag}
-                    className='w-full bg-black py-4 text-white hover:bg-gray-500'
-                  >
+                  <Button onClick={handleAddToBag} className='w-full py-4'>
                     ADD TO BAG
-                  </button>
+                  </Button>
                 </div>
 
                 <div className='mt-12'>

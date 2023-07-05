@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import CartProduct from '../components/CartProduct';
+import Button from '../components/Button';
 
 const Cart = ({ cart, setCart }) => {
   const subtotal = cart.reduce(
@@ -58,9 +59,7 @@ const Cart = ({ cart, setCart }) => {
             </div>
             <div className='hidden lg:block'>
               <Link to='/checkout'>
-                <div className='my-6 bg-black py-4 text-center text-white'>
-                  Checkout
-                </div>
+                <Button className='my-6 w-full py-4'>Checkout</Button>
               </Link>
             </div>
           </div>
@@ -68,8 +67,8 @@ const Cart = ({ cart, setCart }) => {
 
         <div className='fixed bottom-0 w-full bg-white py-4 lg:hidden'>
           <Link to='/checkout'>
-            <div className='mx-6 bg-black py-4 text-center text-white'>
-              Checkout
+            <div className='mx-6'>
+              <Button className='w-full py-4'>Checkout</Button>
             </div>
           </Link>
         </div>

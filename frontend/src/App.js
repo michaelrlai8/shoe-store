@@ -9,6 +9,9 @@ import Home from './pages/Home';
 import ProductsListing from './pages/ProductsListing';
 import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
+import Checkout from './pages/Checkout';
+import PaymentSuccess from './pages/PaymentSuccess';
+import PaymentFailure from './pages/PaymentFailure';
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -136,6 +139,14 @@ function App() {
           path={`/cart`}
           element={<Cart cart={cart} setCart={setCart} />}
         />
+
+        <Route
+          path={`/checkout`}
+          element={<Checkout cart={cart} setCart={setCart} />}
+        />
+
+        <Route path={`/payment-success`} element={<PaymentSuccess />} />
+        <Route path={`/payment-failure`} element={<PaymentFailure />} />
       </Routes>
     </div>
   );

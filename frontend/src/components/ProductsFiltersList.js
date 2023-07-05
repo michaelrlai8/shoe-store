@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IoCloseOutline } from 'react-icons/io5';
 
-import ProductsFiltersListCategories from './ProductsFiltersListCategories';
+import ProductsFiltersListGroup from './ProductsFiltersListGroup';
 
 const ProductsFiltersList = ({
   showFilters,
@@ -11,7 +11,7 @@ const ProductsFiltersList = ({
   setFilters,
   handleShowFilterList,
 }) => {
-  const handleCategoryFilter = (category) => {
+  const handleCategoryFilters = (category) => {
     if (!filters.category.includes(category)) {
       setFilters({
         ...filters,
@@ -23,7 +23,30 @@ const ProductsFiltersList = ({
     }
   };
 
-  const categoryNames = ['men', 'women', 'kids'];
+  const handlePriceFilters = (price) => {
+    if (!filters.price.includes(price)) {
+      setFilters({
+        ...filters,
+        price: [...filters.price, price],
+      });
+    } else {
+      const removedFilter = filters.price.filter((n) => n !== price);
+      setFilters({ ...filters, price: removedFilter });
+    }
+  };
+
+  const groupFilters = [
+    {
+      group: 'Categories',
+      names: ['men', 'women', 'kids'],
+      handler: handleCategoryFilters,
+    },
+    {
+      group: 'Price',
+      names: ['$0 - $49', '$50 - $99', '$100 - $149', '$150+'],
+      handler: handlePriceFilters,
+    },
+  ];
 
   return (
     <div>
@@ -42,11 +65,14 @@ const ProductsFiltersList = ({
               </button>
             </div>
 
-            <ProductsFiltersListCategories
-              filters={filters}
-              categoryNames={categoryNames}
-              handleCategoryFilter={handleCategoryFilter}
-            />
+            {groupFilters.map((groupFilter, index) => (
+              <ProductsFiltersListGroup
+                key={`groupFilter ${index}`}
+                filters={filters}
+                groupFilter={groupFilter}
+                handler={groupFilter.handler}
+              />
+            ))}
           </div>
           <div className=''>
             <div className='grid grid-cols-2 gap-2 pt-6 lg:hidden'>
