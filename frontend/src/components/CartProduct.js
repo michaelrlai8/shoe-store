@@ -16,6 +16,8 @@ const CartProduct = ({ product, index, cart, setCart }) => {
         cartProduct.selectedSize === dropdownSize
       ) {
         return true;
+      } else {
+        return false;
       }
     });
 
