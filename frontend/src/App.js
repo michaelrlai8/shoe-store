@@ -10,8 +10,7 @@ import ProductsListing from './pages/ProductsListing';
 import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
-import PaymentSuccess from './pages/PaymentSuccess';
-import PaymentFailure from './pages/PaymentFailure';
+import CheckoutSuccess from './pages/CheckoutSuccess';
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -145,8 +144,7 @@ function App() {
           element={<Checkout cart={cart} setCart={setCart} />}
         />
 
-        <Route path={`/payment-success`} element={<PaymentSuccess />} />
-        <Route path={`/payment-failure`} element={<PaymentFailure />} />
+        <Route path={`/checkout/success`} element={<CheckoutSuccess />} />
       </Routes>
     </div>
   );

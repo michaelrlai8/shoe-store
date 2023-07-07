@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 
 import Input from '../components/Input';
 import Button from '../components/Button';
-import CartProduct from '../components/CartProduct';
+
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const Checkout = ({ cart, setCart }) => {
   const [formData, setFormData] = useState({
@@ -21,13 +24,41 @@ const Checkout = ({ cart, setCart }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
   };
 
   const subtotal = cart.reduce(
     (accumulator, obj) => accumulator + obj.price * obj.quantity,
     0
   );
+
+  const handlePayment = async () => {
+    const stripe = await stripePromise;
+    const requestBody = {
+      userName: [formData.firstName, formData.lastName].join(' '),
+      email: formData.email,
+      products: cart.map(({ id, quantity }) => ({
+        id,
+        quantity,
+      })),
+    };
+
+    console.log(requestBody);
+
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/api/orders`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestBody),
+      }
+    );
+
+    const session = await response.json();
+
+    await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+  };
 
   return (
     <div className='mb-32 mt-[60px]'>
@@ -111,7 +142,7 @@ const Checkout = ({ cart, setCart }) => {
             </div>
             <div className='hidden lg:block'>
               <Link to='/checkout'>
-                <Button onClick={handleSubmit} className='my-6 w-full py-4 '>
+                <Button onClick={handlePayment} className='my-6 w-full py-4 '>
                   Pay
                 </Button>
               </Link>
@@ -122,7 +153,7 @@ const Checkout = ({ cart, setCart }) => {
         <div className='fixed bottom-0 w-full bg-white py-4 lg:hidden'>
           <Link to='/checkout'>
             <div className='mx-6'>
-              <Button onClick={handleSubmit} className='w-full bg-black py-4'>
+              <Button onClick={handlePayment} className='w-full bg-black py-4'>
                 Pay
               </Button>
             </div>

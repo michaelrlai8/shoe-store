@@ -21,4 +21,11 @@ module.exports = ({ env }) => ({
     },
   },
   //...
+  settings: {
+    stripe: {
+      publishableKey: "YOUR_STRIPE_PUBLISHABLE_KEY",
+      secretKey: process.env.STRIPE_KEY,
+      webhookSecret: "YOUR_STRIPE_WEBHOOK_SECRET",
+    },
+  },
 });
