@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 
-import Footer from '../components/Footer';
 import ProductDetailsCarousel from '../components/ProductDetailsCarousel';
 import ProductDetailsDropdowns from '../components/ProductDetailsDropdowns';
 import ProductDetailsSizes from '../components/ProductDetailsSizes';
@@ -192,7 +191,6 @@ const ProductDetails = ({ cart, setCart, cartQuantity, setCartQuantity }) => {
               setShowProductAddedPopup={setShowProductAddedPopup}
             />
           )}
-          <Footer />
         </div>
       )}
     </div>
