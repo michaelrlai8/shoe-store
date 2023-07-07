@@ -42,8 +42,6 @@ const Checkout = ({ cart, setCart }) => {
       })),
     };
 
-    console.log(requestBody);
-
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}/api/orders`,
       {
@@ -54,8 +52,6 @@ const Checkout = ({ cart, setCart }) => {
     );
 
     const session = await response.json();
-
-    console.log(session);
 
     await stripe.redirectToCheckout({
       sessionId: session.id,
