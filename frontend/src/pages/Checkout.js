@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Link, redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Input from '../components/Input';
 import Button from '../components/Button';

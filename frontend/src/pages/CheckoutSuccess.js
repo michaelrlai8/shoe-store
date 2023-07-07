@@ -5,7 +5,7 @@ const CheckoutSuccess = ({ setCart }) => {
     let tempCart = [];
     setCart(tempCart);
     localStorage.setItem('cart', JSON.stringify(tempCart));
-  }, []);
+  }, [setCart]);
 
   return (
     <div className='mt-40'>
