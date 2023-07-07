@@ -7,7 +7,6 @@ import kids from '../assets/kids.jpg';
 import unisex from '../assets/unisex.jpg';
 import mid from '../assets/mid.jpg';
 
-import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 
 const Home = ({ setFilters }) => {
@@ -106,8 +105,6 @@ const Home = ({ setFilters }) => {
             <img src={unisex} alt='' className='aspect-square object-cover' />
           </div>
         </div>
-
-        <Footer />
       </div>
     </div>
   );

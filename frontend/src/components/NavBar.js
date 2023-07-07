@@ -14,10 +14,6 @@ const NavBar = ({ cart, cartQuantity, showNav, setShowNav, setFilters }) => {
     document.body.classList.toggle('overflow-hidden');
   };
 
-  if (cart) {
-    console.log(cart);
-  }
-
   return (
     <div className='fixed top-0 z-10 w-full bg-white'>
       <div className='flex justify-between px-6 py-4 lg:px-12'>
