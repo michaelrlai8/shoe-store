@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { IoCloseOutline } from 'react-icons/io5';
 import { FaCheckCircle } from 'react-icons/fa';
 
+import Button from './Button';
+
 const ProductAddedPopup = ({
   data,
   selectedSize,
@@ -63,12 +65,9 @@ const ProductAddedPopup = ({
             View Bag
           </Link>
 
-          <button
-            onClick={() => setShowProductAddedPopup(false)}
-            className='bg-black py-2 text-white'
-          >
-            Checkout
-          </button>
+          <Link to='/checkout' onClick={() => setShowProductAddedPopup(false)}>
+            <Button className='w-full py-2'>Checkout</Button>
+          </Link>
         </div>
       </div>
     </div>

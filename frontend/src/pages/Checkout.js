@@ -55,13 +55,13 @@ const Checkout = ({ cart, setCart }) => {
 
     const session = await response.json();
 
-    let tempCart = [];
-    setCart(tempCart);
-    localStorage.setItem('cart', JSON.stringify(tempCart));
-
     await stripe.redirectToCheckout({
       sessionId: session.id,
     });
+
+    let tempCart = [];
+    setCart(tempCart);
+    localStorage.setItem('cart', JSON.stringify(tempCart));
   };
 
   return (
