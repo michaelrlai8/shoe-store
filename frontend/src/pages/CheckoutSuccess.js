@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const CheckoutSuccess = () => {
+const CheckoutSuccess = ({ setCart }) => {
+  useEffect(() => {
+    let tempCart = [];
+    setCart(tempCart);
+    localStorage.setItem('cart', JSON.stringify(tempCart));
+  }, []);
+
   return (
     <div className='mt-40'>
       <div className='text-center text-3xl font-bold'>Thank you!</div>

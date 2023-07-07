@@ -144,7 +144,10 @@ function App() {
           element={<Checkout cart={cart} setCart={setCart} />}
         />
 
-        <Route path={`/checkout/success`} element={<CheckoutSuccess />} />
+        <Route
+          path={`/checkout/success`}
+          element={<CheckoutSuccess setCart={setCart} />}
+        />
       </Routes>
     </div>
   );

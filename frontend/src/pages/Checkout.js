@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 
 import Input from '../components/Input';
 import Button from '../components/Button';
@@ -55,13 +55,11 @@ const Checkout = ({ cart, setCart }) => {
 
     const session = await response.json();
 
+    console.log(session);
+
     await stripe.redirectToCheckout({
       sessionId: session.id,
     });
-
-    let tempCart = [];
-    setCart(tempCart);
-    localStorage.setItem('cart', JSON.stringify(tempCart));
   };
 
   return (
